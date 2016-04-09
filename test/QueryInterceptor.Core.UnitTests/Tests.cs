@@ -45,7 +45,7 @@ namespace QueryInterceptor.Core.UnitTests
         }
 
         [Fact]
-        public void FirstAsync()
+        public void InterceptWith_TestEqualsToNotEqualsVisitor_FirstAsync()
         {
             var queryEven = Enumerable.Range(0, 10).AsQueryable().Where(n => n % 2 == 0).AsQueryable();
 
@@ -56,6 +56,34 @@ namespace QueryInterceptor.Core.UnitTests
             task.ContinueWith(t => t.Result).Wait();
 
             Assert.Equal(7, task.Result);
+        }
+
+        [Fact]
+        public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCultureIgnoreCase()
+        {
+            IQueryable<string> query = new List<string> { "A", "a" }.AsQueryable();
+
+            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCultureIgnoreCase);
+
+            List<string> queryIntercepted1 = query.InterceptWith(visitor).Where(s => s == "A").ToList();
+            Assert.Equal(new List<string> { "A", "a" }, queryIntercepted1);
+
+            List<string> queryIntercepted2 = query.InterceptWith(visitor).Where(s => s == "a").ToList();
+            Assert.Equal(new List<string> { "A", "a" }, queryIntercepted2);
+        }
+
+        [Fact]
+        public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCulture()
+        {
+            IQueryable<string> query = new List<string> { "A", "a" }.AsQueryable();
+
+            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCulture);
+
+            List<string> queryIntercepted1 = query.InterceptWith(visitor).Where(s => s == "A").ToList();
+            Assert.Equal(new List<string> { "A" }, queryIntercepted1);
+
+            List<string> queryIntercepted2 = query.InterceptWith(visitor).Where(s => s == "a").ToList();
+            Assert.Equal(new List<string> { "a" }, queryIntercepted2);
         }
     }
 }
