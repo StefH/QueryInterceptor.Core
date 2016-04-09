@@ -99,5 +99,57 @@ namespace QueryInterceptor.Core.UnitTests
             List<Blog> numbersOdd = query.InterceptWith(visitor).Where(b => b.BlogId >= 0).ToList();
             CollectionAssert.AreEqual(new List<int> { 1, 3, 5, 7, 9 }, numbersOdd.Select(b => b.BlogId).OrderBy(id => id).ToList());
         }
+
+        [Fact]
+        public void Entities_Select()
+        {
+            _context.Blogs.Add(new Blog { Name = "A" });
+            _context.Blogs.Add(new Blog { Name = "a" });
+            _context.SaveChanges();
+
+            IQueryable<Blog> query = _context.Blogs.AsQueryable();
+
+            List<Blog> queryIntercepted1 = query.Where(b => b.Name == "A").ToList();
+            Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());
+
+            List<Blog> queryIntercepted2 = query.Where(b => b.Name == "a").ToList();
+            Assert.Equal(new List<string> { "a" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
+        }
+
+        [Fact]
+        public void Entities_InterceptWith_TestSetComparerExpressionVisitor_CurrentCultureIgnoreCase()
+        {
+            _context.Blogs.Add(new Blog { Name = "A" });
+            _context.Blogs.Add(new Blog { Name = "a" });
+            _context.SaveChanges();
+
+            IQueryable<Blog> query = _context.Blogs.AsQueryable();
+
+            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCultureIgnoreCase);
+
+            List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
+            Assert.Equal(new List<string> { "A", "a" }, queryIntercepted1.Select(b => b.Name).ToList());
+
+            List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
+            Assert.Equal(new List<string> { "a", "A" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
+        }
+
+        [Fact]
+        public void Entities_InterceptWith_TestSetComparerExpressionVisitor_CurrentCulture()
+        {
+            _context.Blogs.Add(new Blog { Name = "A" });
+            _context.Blogs.Add(new Blog { Name = "a" });
+            _context.SaveChanges();
+
+            IQueryable<Blog> query = _context.Blogs.AsQueryable();
+
+            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCulture);
+
+            List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
+            Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());
+
+            List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
+            Assert.Equal(new List<string> { "a" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
+        }
     }
 }
