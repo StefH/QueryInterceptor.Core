@@ -1,8 +1,8 @@
 {
     "version": "1.0.0-beta-00001",
     "title": "QueryInterceptor.Core",
-    "description": "Provides a generic way to intercept IQueryable expression trees using custom expression visitors.",
-    "summary": "Provides a generic way to intercept IQueryable expression trees using custom expression visitors.",
+    "description": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
+    "summary": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
     "tags": [ "linq", "provider", "query", "intercept", "expression", "expressionvisitor", "visitor" ],
     "authors": [ "David Fowler", "Stef Heyenrath" ],
     "owners": [ "Stef Heyenrath" ],
