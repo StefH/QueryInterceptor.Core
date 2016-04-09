@@ -1,5 +1,6 @@
 {
     "version": "1.0.0-beta-00001",
+    "title": "QueryInterceptor.Core",
     "description": "Provides a generic way to intercept IQueryable expression trees using custom expression visitors.",
     "summary": "Provides a generic way to intercept IQueryable expression trees using custom expression visitors.",
     "tags": [ "linq", "provider", "query", "intercept", "expression", "expressionvisitor", "visitor" ],
@@ -8,6 +9,7 @@
     "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
     "releasenotes": "",
     "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
+    "releaseNotes": "initial (beta) version",
 
     "compilationOptions": {
         "define": [ "REFLECTIONBRIDGE" ]
