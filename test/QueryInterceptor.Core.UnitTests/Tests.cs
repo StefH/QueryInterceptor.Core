@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
+using QueryInterceptor.Core.ExpressionVisitors;
 using Xunit;
 #if DNXCORE50
 using Microsoft.Data.Entity;
@@ -12,20 +13,6 @@ using System.Data.Entity;
 
 namespace QueryInterceptor.Core.UnitTests
 {
-    public class EqualsToNotEqualsVisitor : ExpressionVisitor
-    {
-        protected override Expression VisitBinary(BinaryExpression node)
-        {
-            if (node.NodeType == ExpressionType.Equal)
-            {
-                // Change == to !=
-                return Expression.NotEqual(node.Left, node.Right);
-            }
-
-            return base.VisitBinary(node);
-        }
-    }
-
     public class Tests
     {
         [Fact]

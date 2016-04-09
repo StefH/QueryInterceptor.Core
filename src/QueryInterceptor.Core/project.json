@@ -7,6 +7,7 @@
     "owners": [ "Stef Heyenrath" ],
     "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
     "releasenotes": "",
+    "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
 
     "compilationOptions": {
         "define": [ "REFLECTIONBRIDGE" ]
@@ -51,6 +52,8 @@
         },
         "dnxcore50": {
             "dependencies": {
+                "Microsoft.CSharp": "4.0.1-beta-*",
+
                 "EntityFramework.Core": "7.0.0-rc1-final"
             }
         }

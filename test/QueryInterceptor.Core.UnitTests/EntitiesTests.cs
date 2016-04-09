@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.Data.Entity;
+using QueryInterceptor.Core.ExpressionVisitors;
 using QueryInterceptor.Core.UnitTests.Helpers.Entities;
 using TestToolsToXunitProxy;
 using Xunit;
