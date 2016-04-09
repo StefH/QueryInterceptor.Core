@@ -1,15 +1,15 @@
 #QueryInterceptor.Core
 
 Forked from :
-https://github.com/davidfowl/QueryInterceptor
+https://github.com/davidfowl/QueryInterceptor with support for dnxcore50.
 
 The following frameworks are supported
-net45
-net451
-net452
-dnx451
-dnx452
-dnxcore50
+* net45
+* net451
+* net452
+* dnx451
+* dnx452
+* dnxcore50
 
 ## The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.
