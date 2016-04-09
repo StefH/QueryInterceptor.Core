@@ -1,0 +1,20 @@
+﻿{
+    "version": "1.0.0-*",
+    "authors": [ "Stef Heyenrath" ],
+    "dependencies": {
+        "QueryInterceptor.Core": "1.0.0-beta-00001"
+    },
+    "commands": {
+        "run": "run"
+    },
+    "frameworks": {
+        "net452": { },
+        "dnx451": { },
+        "dnx452": { },
+        "dnxcore50": {
+            "dependencies": {
+                "System.Console": "4.0.0-beta-*"
+            }
+        }
+    }
+}

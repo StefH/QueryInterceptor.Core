@@ -1,0 +1,58 @@
+{
+    "version": "1.0.0-beta-00001",
+    "description": "Provides a generic way to intercept IQueryable expression trees using custom expression visitors.",
+    "summary": "Provides a generic way to intercept IQueryable expression trees using custom expression visitors.",
+    "tags": [ "linq", "provider", "query", "intercept", "expression", "expressionvisitor", "visitor" ],
+    "authors": [ "David Fowler", "Stef Heyenrath" ],
+    "owners": [ "Stef Heyenrath" ],
+    "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
+    "releasenotes": "",
+
+    "compilationOptions": {
+        "define": [ "REFLECTIONBRIDGE" ]
+    },
+
+    "dependencies": {
+        "JetBrains.Annotations": "10.1.2-eap",
+        "ReflectionBridge": "0.0.8"
+    },
+
+    "frameworks": {
+        "net45": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "net451": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "net452": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "dnx451": {
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "dnx452": {
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "dnxcore50": {
+            "dependencies": {
+                "EntityFramework.Core": "7.0.0-rc1-final"
+            }
+        }
+    }
+}
