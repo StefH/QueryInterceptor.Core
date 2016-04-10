@@ -63,7 +63,7 @@ namespace QueryInterceptor.Core.UnitTests
         {
             IQueryable<string> query = new List<string> { "A", "a" }.AsQueryable();
 
-            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCultureIgnoreCase);
+            var visitor = new StringComparisonVisitor(StringComparison.CurrentCultureIgnoreCase);
 
             List<string> queryIntercepted1 = query.InterceptWith(visitor).Where(s => s == "A").ToList();
             Assert.Equal(new List<string> { "A", "a" }, queryIntercepted1);
@@ -77,7 +77,7 @@ namespace QueryInterceptor.Core.UnitTests
         {
             IQueryable<string> query = new List<string> { "A", "a" }.AsQueryable();
 
-            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCulture);
+            var visitor = new StringComparisonVisitor(StringComparison.CurrentCulture);
 
             List<string> queryIntercepted1 = query.InterceptWith(visitor).Where(s => s == "A").ToList();
             Assert.Equal(new List<string> { "A" }, queryIntercepted1);

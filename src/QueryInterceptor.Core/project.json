@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0-beta-00001",
+    "version": "1.0.0-*",
     "title": "QueryInterceptor.Core",
     "description": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
     "summary": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
@@ -9,7 +9,7 @@
     "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
     "releasenotes": "",
     "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
-    "releaseNotes": "initial (beta) version",
+    "releaseNotes": "initial version",
 
     "compilationOptions": {
         "define": [ "REFLECTIONBRIDGE" ]
@@ -36,6 +36,20 @@
             }
         },
         "net452": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "net46": {
+            "frameworkAssemblies": {
+            },
+            "dependencies": {
+                "EntityFramework": "6.1.3"
+            }
+        },
+        "net461": {
             "frameworkAssemblies": {
             },
             "dependencies": {

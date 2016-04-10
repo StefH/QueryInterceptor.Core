@@ -6,13 +6,13 @@ namespace QueryInterceptor.Core.ExpressionVisitors
     /// <summary>
     /// copied from https://gist.github.com/mcintyre321/6294588
     /// </summary>
-    public class SetComparerExpressionVisitor : ExpressionVisitor
+    public class StringComparisonVisitor : ExpressionVisitor
     {
         private const string DummyString = "_QCore_";
 
         readonly StringComparison _comparer;
 
-        public SetComparerExpressionVisitor(StringComparison comparer)
+        public StringComparisonVisitor(StringComparison comparer)
         {
             _comparer = comparer;
         }

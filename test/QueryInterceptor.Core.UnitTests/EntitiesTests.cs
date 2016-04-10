@@ -23,8 +23,8 @@ namespace QueryInterceptor.Core.UnitTests
         public EntitiesTests()
         {
             var builder = new DbContextOptionsBuilder();
-            //builder.UseSqlite($"Filename=QueryInterceptor.Core.DB.{Guid.NewGuid()}.db");
-            builder.UseInMemoryDatabase();
+            builder.UseSqlite($"Filename=QueryInterceptor.Core.DB.{Guid.NewGuid()}.db");
+            //builder.UseInMemoryDatabase();
 
             _context = new BlogContext(builder.Options);
             _context.Database.EnsureDeleted();
@@ -67,7 +67,7 @@ namespace QueryInterceptor.Core.UnitTests
         }
 
         [Fact]
-        public void InterceptWith_TestEqualsToNotEqualsVisitor()
+        public void Entities_InterceptWith_IQueryable()
         {
             PopulateTestData(10, 0);
 
@@ -86,7 +86,7 @@ namespace QueryInterceptor.Core.UnitTests
         }
 
         [Fact]
-        public void Entities_InterceptWith_TestEqualsToNotEqualsVisitor()
+        public void Entities_InterceptWith_EqualsToNotEqualsVisitor()
         {
             PopulateTestData(10, 0);
 
@@ -96,8 +96,7 @@ namespace QueryInterceptor.Core.UnitTests
             IQueryable<Blog> queryIntercepted = query.InterceptWith(visitor);
             Assert.NotNull(queryIntercepted);
 
-            List<Blog> numbersOdd = query.InterceptWith(visitor).Where(b => b.BlogId >= 0).ToList();
-            CollectionAssert.AreEqual(new List<int> { 1, 3, 5, 7, 9 }, numbersOdd.Select(b => b.BlogId).OrderBy(id => id).ToList());
+            CollectionAssert.AreEqual(new List<int> { 1, 3, 5, 7, 9 }, queryIntercepted.Select(b => b.BlogId).OrderBy(id => id).ToList());
         }
 
         [Fact]
@@ -117,7 +116,7 @@ namespace QueryInterceptor.Core.UnitTests
         }
 
         [Fact]
-        public void Entities_InterceptWith_TestSetComparerExpressionVisitor_CurrentCultureIgnoreCase()
+        public void Entities_InterceptWith_StringComparisonVisitor_CurrentCultureIgnoreCase()
         {
             _context.Blogs.Add(new Blog { Name = "A" });
             _context.Blogs.Add(new Blog { Name = "a" });
@@ -125,17 +124,17 @@ namespace QueryInterceptor.Core.UnitTests
 
             IQueryable<Blog> query = _context.Blogs.AsQueryable();
 
-            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCultureIgnoreCase);
+            var visitor = new StringComparisonVisitor(StringComparison.CurrentCultureIgnoreCase);
 
             List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
-            Assert.Equal(new List<string> { "A", "a" }, queryIntercepted1.Select(b => b.Name).ToList());
+            Assert.Equal(new List<string> { "a", "A" }, queryIntercepted1.Select(b => b.Name).OrderBy(x => x).ToList());
 
             List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
             Assert.Equal(new List<string> { "a", "A" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
         }
 
         [Fact]
-        public void Entities_InterceptWith_TestSetComparerExpressionVisitor_CurrentCulture()
+        public void Entities_InterceptWith_StringComparisonVisitor_CurrentCulture()
         {
             _context.Blogs.Add(new Blog { Name = "A" });
             _context.Blogs.Add(new Blog { Name = "a" });
@@ -143,7 +142,7 @@ namespace QueryInterceptor.Core.UnitTests
 
             IQueryable<Blog> query = _context.Blogs.AsQueryable();
 
-            var visitor = new SetComparerExpressionVisitor(StringComparison.CurrentCulture);
+            var visitor = new StringComparisonVisitor(StringComparison.CurrentCulture);
 
             List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
             Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());

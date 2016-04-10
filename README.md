@@ -5,10 +5,9 @@ https://github.com/davidfowl/QueryInterceptor with support for dnxcore50.
 
 The following frameworks are supported
 * net45
-* net451
-* net452
-* dnx451
-* dnx452
+* net45x
+* net46x
+* dnx45x
 * dnxcore50
 
 ## The problem

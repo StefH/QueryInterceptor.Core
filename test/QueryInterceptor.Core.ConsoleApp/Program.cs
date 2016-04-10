@@ -23,7 +23,7 @@ namespace QueryInterceptor.Core.ConsoleApp
     {
         public void Main(string[] args)
         {
-            Console.WriteLine("Hello QueryInterceptor.dnx");
+            Console.WriteLine("Hello QueryInterceptor.Core");
 
             IQueryable<int> query = Enumerable.Range(0, 10).AsQueryable().Where(n => n > 0 && n % 2 == 0);
 
