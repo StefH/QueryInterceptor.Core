@@ -1,4 +1,4 @@
-﻿#if DNXCORE50
+﻿#if DNXCORE50 || DOTNET5_4
 using Microsoft.Data.Entity.Query.Internal;
 
 namespace System.Data.Entity.Infrastructure

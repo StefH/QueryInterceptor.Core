@@ -9,10 +9,9 @@
     "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
     "releasenotes": "",
     "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
-    "releaseNotes": "initial version",
+    "releaseNotes": "Expose the OriginalProvider property and add dotnet5.4",
 
     "compilationOptions": {
-        "define": [ "REFLECTIONBRIDGE" ]
     },
 
     "dependencies": {
@@ -22,36 +21,26 @@
 
     "frameworks": {
         "net45": {
-            "frameworkAssemblies": {
-            },
             "dependencies": {
                 "EntityFramework": "6.1.3"
             }
         },
         "net451": {
-            "frameworkAssemblies": {
-            },
             "dependencies": {
                 "EntityFramework": "6.1.3"
             }
         },
         "net452": {
-            "frameworkAssemblies": {
-            },
             "dependencies": {
                 "EntityFramework": "6.1.3"
             }
         },
         "net46": {
-            "frameworkAssemblies": {
-            },
             "dependencies": {
                 "EntityFramework": "6.1.3"
             }
         },
         "net461": {
-            "frameworkAssemblies": {
-            },
             "dependencies": {
                 "EntityFramework": "6.1.3"
             }
@@ -67,6 +56,13 @@
             }
         },
         "dnxcore50": {
+            "dependencies": {
+                "Microsoft.CSharp": "4.0.1-beta-*",
+
+                "EntityFramework.Core": "7.0.0-rc1-final"
+            }
+        },
+        "dotnet54": {
             "dependencies": {
                 "Microsoft.CSharp": "4.0.1-beta-*",
 

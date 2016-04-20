@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using QueryInterceptor.Core.Validation;
 
 namespace QueryInterceptor.Core.ExpressionVisitors
 {
@@ -42,6 +43,8 @@ namespace QueryInterceptor.Core.ExpressionVisitors
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
+            Check.NotNull(node, nameof(node));
+
             if (node.Method.DeclaringType == typeof(string))
             {
                 switch (node.Method.Name)

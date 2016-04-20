@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using QueryInterceptor.Core.Validation;
 
 namespace QueryInterceptor.Core.ExpressionVisitors
 {
@@ -6,6 +7,8 @@ namespace QueryInterceptor.Core.ExpressionVisitors
     {
         protected override Expression VisitBinary(BinaryExpression node)
         {
+            Check.NotNull(node, nameof(node));
+
             if (node.NodeType == ExpressionType.Equal)
             {
                 // Change == to !=
