@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0-*",
+    "version": "1.0.1-*",
     "title": "QueryInterceptor.Core",
     "description": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
     "summary": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
@@ -16,8 +16,8 @@
     },
 
     "dependencies": {
-        "JetBrains.Annotations": "10.1.2-eap",
-        "ReflectionBridge": "0.0.8"
+        "JetBrains.Annotations": "10.1.4",
+        "ReflectionBridge": "0.0.9"
     },
 
     "frameworks": {

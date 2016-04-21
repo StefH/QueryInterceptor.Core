@@ -2,7 +2,7 @@
     "version": "1.0.0-*",
     "authors": [ "Stef Heyenrath" ],
     "dependencies": {
-        "QueryInterceptor.Core": "1.0.0"
+        "QueryInterceptor.Core": "1.0.1"
     },
     "commands": {
         "run": "run"
