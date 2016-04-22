@@ -3,7 +3,7 @@
     "authors": [ "Stef Heyenrath" ],
 
     "dependencies": {
-        "QueryInterceptor.Core": "1.0.1",
+        "QueryInterceptor.Core": "1.0.2",
 
         "TestToolsToXunitProxy": "0.0.1",
         "xunit": "2.1-*",

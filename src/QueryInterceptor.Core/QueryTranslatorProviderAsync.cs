@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using QueryInterceptor.Core.Validation;
-using ReflectionBridge.Extensions;
+using System.Reflection;
 
 namespace QueryInterceptor.Core
 {
@@ -199,7 +199,7 @@ namespace QueryInterceptor.Core
             Check.NotNull(node, nameof(node));
 
             // Fix up the Expression tree to work with the underlying LINQ provider
-            if (node.Type.IsGenericType() && node.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
+            if (node.Type.GetTypeInfo().IsGenericType && node.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
                 var provider = ((IQueryable)node.Value).Provider as QueryTranslatorProvider;
 
