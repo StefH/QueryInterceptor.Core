@@ -15,6 +15,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QueryInterceptor.Core.UnitT
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0756C605-D3A6-4D2E-A549-411A9817EE75}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
