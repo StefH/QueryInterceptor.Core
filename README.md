@@ -1,5 +1,7 @@
 #QueryInterceptor.Core
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/queryinterceptor-core)
+
 Forked from :
 https://github.com/davidfowl/QueryInterceptor with support for dnxcore50.
 
