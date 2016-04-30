@@ -5,9 +5,7 @@ using System.Linq.Expressions;
 using Microsoft.Data.Entity;
 using QueryInterceptor.Core.ExpressionVisitors;
 using QueryInterceptor.Core.UnitTests.Helpers.Entities;
-using TestToolsToXunitProxy;
 using Xunit;
-using Assert = Xunit.Assert;
 
 namespace QueryInterceptor.Core.UnitTests
 {
@@ -96,7 +94,7 @@ namespace QueryInterceptor.Core.UnitTests
             IQueryable<Blog> queryIntercepted = query.InterceptWith(visitor);
             Assert.NotNull(queryIntercepted);
 
-            CollectionAssert.AreEqual(new List<int> { 1, 3, 5, 7, 9 }, queryIntercepted.Select(b => b.BlogId).OrderBy(id => id).ToList());
+            Assert.Equal(new List<int> { 1, 3, 5, 7, 9 }, queryIntercepted.Select(b => b.BlogId).OrderBy(id => id).ToList());
         }
 
         [Fact]
