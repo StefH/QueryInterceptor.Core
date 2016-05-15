@@ -21,7 +21,7 @@ namespace QueryInterceptor.Core.ConsoleApp
 
     public class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("Hello QueryInterceptor.Core");
 

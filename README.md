@@ -9,9 +9,10 @@ The following frameworks are supported
 * net45
 * net45x
 * net46x
-* dnx45x
-* dnxcore50
-* dotnet5.4
+* dnx451
+* netstandard1.3
+* netstandard1.4
+* netstandard1.5
 
 ## The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.

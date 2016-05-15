@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using QueryInterceptor.Core.ExpressionVisitors;
 using QueryInterceptor.Core.UnitTests.Helpers.Entities;
 using Xunit;
@@ -62,6 +62,20 @@ namespace QueryInterceptor.Core.UnitTests
             }
 
             _context.SaveChanges();
+        }
+
+        // Fixed : EF issue https://github.com/aspnet/EntityFramework/issues/4968
+        [Fact]
+        public void Entities_Select_BlogAndPosts()
+        {
+            //Arrange
+            PopulateTestData(5, 5);
+
+            //Act
+            var expected = _context.Blogs.Select(x => new { x.BlogId, x.Name, x.Posts }).ToArray();
+
+            //Assert
+            Assert.Equal(expected.Length, 5);
         }
 
         [Fact]

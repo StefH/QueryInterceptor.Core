@@ -81,7 +81,7 @@ namespace QueryInterceptor.Core
             return Execute<object>(expression);
         }
 
-#if DNXCORE50 || DOTNET5_4
+#if NETSTANDARD
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
             Check.NotNull(expression, "expression");

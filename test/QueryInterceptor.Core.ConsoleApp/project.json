@@ -1,20 +1,25 @@
 ﻿{
     "version": "1.0.0-*",
     "authors": [ "Stef Heyenrath" ],
+
+    "buildOptions": {
+        "emitEntryPoint": true
+    },
+
     "dependencies": {
-        "QueryInterceptor.Core": "1.0.3"
+        "Microsoft.NETCore.App": {
+            "type": "platform",
+            "version": "1.0.0-rc2-*"
+        },
+        "QueryInterceptor.Core": { "target": "project" }
     },
-    "commands": {
-        "run": "run"
-    },
+
     "frameworks": {
-        "net452": { },
-        "dnx451": { },
-        "dnx452": { },
-        "dnxcore50": {
-            "dependencies": {
-                "System.Console": "4.0.0-beta-*"
-            }
+        "netcoreapp1.5": {
+            "imports": [
+                "dotnet5.4",
+                "portable-net451+win8"
+            ]
         }
     }
 }

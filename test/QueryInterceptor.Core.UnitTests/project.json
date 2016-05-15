@@ -3,28 +3,45 @@
     "authors": [ "Stef Heyenrath" ],
 
     "dependencies": {
-        "QueryInterceptor.Core": "1.0.3",
+        "Microsoft.NETCore.App": {
+            "type": "platform",
+            "version": "1.0.0-rc2-*"
+        },
+        "QueryInterceptor.Core": { "target": "project" },
 
-        "xunit": "2.1-*",
-        "xunit.runner.dnx": "2.1.0-rc1-build204",
+        "Microsoft.EntityFrameworkCore": "1.0.0-rc2-*",
+        "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0-rc2-*",
 
-        "EntityFramework.Core": "7.0.0-rc1-final",
-        "EntityFramework.Sqlite": "7.0.0-rc1-final",
-        "EntityFramework.InMemory": "7.0.0-rc1-final"
+        "xunit": "2.1.0-rc2-*",
+        "dotnet-test-xunit": "1.0.0-rc2-*"
     },
+
 
     "commands": {
         "test": "xunit.runner.dnx"
     },
 
+    "testRunner": "xunit",
+
     "frameworks": {
-        "dnx452": {
+        "netcoreapp1.5": {
+            "buildOptions": { "define": [ "NETSTANDARD" ] },
+            "imports": [
+                "dotnet5.5",
+                "portable-win81+wp81",
+                "portable-net45+wp8",
+                "portable-net45+win8+wp8",
+                "portable-wp81+wpa81",
+                "portable-win81+wp81+wpa81",
+                "portable-net45+win8+wpa81+wp8",
+                "portable-net45+win8",
+                "portable-net45+win8+wpa81",
+                "portable-win81+wpa81",
+                "portable-net451+win81",
+                "portable-net451+win81+wpa81"
+            ],
             "dependencies": {
-                
-            }
-        },
-        "dnxcore50": {
-            "dependencies": {
+                "System.Linq.Queryable": "4.0.1-rc2-*"
             }
         }
     }

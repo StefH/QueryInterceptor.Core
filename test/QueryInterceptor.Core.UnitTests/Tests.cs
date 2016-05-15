@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using System.Threading;
 using QueryInterceptor.Core.ExpressionVisitors;
 using Xunit;
-#if DNXCORE50
-using Microsoft.Data.Entity;
+#if NETSTANDARD
+using Microsoft.EntityFrameworkCore;
 #else
 using System.Data.Entity;
 #endif
