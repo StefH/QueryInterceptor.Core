@@ -12,7 +12,6 @@ init:
 install:
 - ps: Start-FileDownload 'https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/Latest/dotnet-dev-win-x64.latest.exe'
 - cmd: dotnet-dev-win-x64.latest.exe /quiet
-- cmd: dnvm upgrade -u -r clr
 
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\
