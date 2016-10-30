@@ -2,17 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using QueryInterceptor.Core.Validation;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace QueryInterceptor.Core
 {
     internal class QueryTranslatorProviderAsync : QueryTranslatorProvider, IDbAsyncQueryProvider
     {
+        private static readonly TraceSource _ts = new TraceSource(typeof(QueryTranslatorProviderAsync).Name);
         private readonly IEnumerable<ExpressionVisitor> _visitors;
 
         /// <summary>
@@ -65,7 +68,8 @@ namespace QueryInterceptor.Core
         {
             Check.NotNull(expression, nameof(expression));
 
-            var translated = VisitAll(expression);
+            var translated = VisitAllAndOptimize(expression);
+
             return Source.Provider.Execute<TResult>(translated);
         }
 
@@ -84,17 +88,18 @@ namespace QueryInterceptor.Core
 #if NETSTANDARD
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
-            Check.NotNull(expression, "expression");
+            Check.NotNull(expression, nameof(expression));
 
             var provider = Source.Provider as IDbAsyncQueryProvider;
             if (provider != null)
             {
-                var translated = VisitAll(expression);
+                var translated = VisitAllAndOptimize(expression);
+
                 return provider.ExecuteAsync<TResult>(translated);
             }
 
             // In case Source.Provider is not a IDbAsyncQueryProvider, just execute normal
-            return (IAsyncEnumerable<TResult>) Execute<TResult>(expression);
+            return (IAsyncEnumerable<TResult>)Execute<TResult>(expression);
         }
 #else
         /// <summary>
@@ -108,6 +113,8 @@ namespace QueryInterceptor.Core
         /// </returns>
         public Task<TResult> ExecuteAsync<TResult>(Expression expression)
         {
+            Check.NotNull(expression, nameof(expression));
+
             return ExecuteAsync<TResult>(expression, CancellationToken.None);
         }
 #endif
@@ -131,7 +138,8 @@ namespace QueryInterceptor.Core
             var provider = Source.Provider as IDbAsyncQueryProvider;
             if (provider != null)
             {
-                var translated = VisitAll(expression);
+                var translated = VisitAllAndOptimize(expression);
+
                 return provider.ExecuteAsync<TResult>(translated, cancellationToken);
             }
 
@@ -171,20 +179,25 @@ namespace QueryInterceptor.Core
             return ExecuteAsync<object>(expression, cancellationToken);
         }
 
-        internal IEnumerable ExecuteEnumerable(Expression expression)
+        internal IEnumerable ExecuteEnumerable([CanBeNull] Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
 
-            var translated = VisitAll(expression);
+            var translated = VisitAllAndOptimize(expression);
+
             return Source.Provider.CreateQuery(translated);
         }
 
-        private Expression VisitAll(Expression expression)
+        private Expression VisitAllAndOptimize(Expression expression)
         {
             // Run all visitors in order
             var visitors = new ExpressionVisitor[] { this }.Concat(_visitors);
 
-            return visitors.Aggregate(expression, (expr, visitor) => visitor.Visit(expr));
+            var translated = visitors.Aggregate(expression, (expr, visitor) => visitor.Visit(expr));
+
+            var optimized = OptimizeExpression(translated);
+
+            return optimized;
         }
 
         /// <summary>
@@ -212,6 +225,24 @@ namespace QueryInterceptor.Core
             }
 
             return base.VisitConstant(node);
+        }
+
+        private static Expression OptimizeExpression(Expression expression)
+        {
+            if (ExtensibilityPoint.QueryOptimizer != null)
+            {
+                var optimized = ExtensibilityPoint.QueryOptimizer(expression);
+
+                if (optimized != expression)
+                {
+                    _ts.TraceEvent(TraceEventType.Verbose, 0, "Expression before : {0}", expression);
+                    _ts.TraceEvent(TraceEventType.Verbose, 0, "Expression after  : {0}", optimized);
+                }
+
+                return optimized;
+            }
+
+            return expression;
         }
     }
 }

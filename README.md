@@ -2,17 +2,16 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/queryinterceptor-core)
 
+[![Version](https://img.shields.io/nuget/v/QueryInterceptor.Core.svg)](https://www.nuget.org/packages/QueryInterceptor.Core)
+
 Forked from :
-https://github.com/davidfowl/QueryInterceptor with support for dnxcore50.
+https://github.com/davidfowl/QueryInterceptor with support for .Net Core.
 
 The following frameworks are supported
 * net45
 * net45x
 * net46x
-* dnx451
 * netstandard1.3
-* netstandard1.4
-* netstandard1.5
 
 ## The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.

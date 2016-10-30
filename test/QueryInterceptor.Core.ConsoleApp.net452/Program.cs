@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace QueryInterceptor.Core.ConsoleApp
+namespace QueryInterceptor.Core.ConsoleApp.net452
 {
     public class EqualsToNotEqualsVisitor : ExpressionVisitor
     {
@@ -21,11 +21,11 @@ namespace QueryInterceptor.Core.ConsoleApp
         }
     }
 
-    public class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            Console.WriteLine("Hello QueryInterceptor.Core");
+            Console.WriteLine("Hello QueryInterceptor.Core.ConsoleApp.net452");
 
             IQueryable<int> query = Enumerable.Range(0, 10).AsQueryable().Where(n => n > 0 && n % 2 == 0);
 
@@ -35,6 +35,21 @@ namespace QueryInterceptor.Core.ConsoleApp
             var visitor = new EqualsToNotEqualsVisitor();
             List<int> numbersOdd = query.InterceptWith(visitor).Where(x => x >= 0).ToList();
             Console.WriteLine("numbersOdd  > 0 = {0}", string.Join(", ", numbersOdd));
+
+
+            Console.WriteLine(new String('-', 80));
+
+
+            Console.WriteLine("Enable ExpressionOptimizer");
+            ExtensibilityPoint.QueryOptimizer = ExpressionOptimizer.visit;
+
+
+            numbersEven = query.ToList();
+            Console.WriteLine("numbersEven > 0 = {0}", string.Join(", ", numbersEven));
+
+            numbersOdd = query.InterceptWith(visitor).Where(x => x >= 0).ToList();
+            Console.WriteLine("numbersOdd  > 0 = {0}", string.Join(", ", numbersOdd));
+
 
             Console.WriteLine("Press key...");
             Console.ReadLine();

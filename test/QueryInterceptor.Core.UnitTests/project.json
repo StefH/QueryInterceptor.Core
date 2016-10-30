@@ -5,12 +5,12 @@
     "dependencies": {
         "Microsoft.NETCore.App": {
             "type": "platform",
-            "version": "1.0.0-rc2-*"
+            "version": "1.0.1"
         },
         "QueryInterceptor.Core": { "target": "project" },
 
-        "Microsoft.EntityFrameworkCore": "1.0.0-rc2-*",
-        "Microsoft.EntityFrameworkCore.Sqlite": "1.0.0-rc2-*",
+        "Microsoft.EntityFrameworkCore": "1.0.1",
+        "Microsoft.EntityFrameworkCore.Sqlite": "1.0.1",
 
         "xunit": "2.1.0-rc2-*",
         "dotnet-test-xunit": "1.0.0-rc2-*"
@@ -41,7 +41,7 @@
                 "portable-net451+win81+wpa81"
             ],
             "dependencies": {
-                "System.Linq.Queryable": "4.0.1-rc2-*"
+                "System.Linq.Queryable": "4.0.1"
             }
         }
     }
