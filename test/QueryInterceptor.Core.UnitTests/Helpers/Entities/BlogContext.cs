@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace QueryInterceptor.Core.UnitTests.Helpers.Entities
+namespace QueryInterceptor.UnitTests.Helpers.Entities
 {
     public class BlogContext : DbContext
     {

@@ -5,13 +5,18 @@ using System.Linq.Expressions;
 using System.Threading;
 using QueryInterceptor.Core.ExpressionVisitors;
 using Xunit;
+using QueryInterceptor.Core;
 #if NETSTANDARD
 using Microsoft.EntityFrameworkCore;
 #else
 using System.Data.Entity;
 #endif
 
+#if EF
+namespace QueryInterceptor.EntityFramework
+#else
 namespace QueryInterceptor.Core.UnitTests
+#endif
 {
     public class Tests
     {
@@ -44,6 +49,7 @@ namespace QueryInterceptor.Core.UnitTests
             Assert.Equal(new List<int> { 1, 3, 5, 7, 9 }, numbersOdd);
         }
 
+#if EF
         [Fact]
         public void InterceptWith_TestEqualsToNotEqualsVisitor_FirstAsync()
         {
@@ -57,6 +63,7 @@ namespace QueryInterceptor.Core.UnitTests
 
             Assert.Equal(7, task.Result);
         }
+#endif
 
         [Fact]
         public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCultureIgnoreCase()

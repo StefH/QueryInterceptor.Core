@@ -4,10 +4,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using QueryInterceptor.Core.ExpressionVisitors;
-using QueryInterceptor.Core.UnitTests.Helpers.Entities;
+using QueryInterceptor.UnitTests.Helpers.Entities;
 using Xunit;
+using QueryInterceptor.Core;
 
+#if EF
+namespace QueryInterceptor.EntityFramework
+#else
 namespace QueryInterceptor.Core.UnitTests
+#endif
 {
     /// <summary>
     /// Summary description for EntitiesTests

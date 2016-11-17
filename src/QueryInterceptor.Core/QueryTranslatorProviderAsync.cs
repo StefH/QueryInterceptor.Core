@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+#if EF
 using System.Data.Entity.Infrastructure;
+#endif
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
@@ -13,7 +15,12 @@ using JetBrains.Annotations;
 
 namespace QueryInterceptor.Core
 {
-    internal class QueryTranslatorProviderAsync : QueryTranslatorProvider, IDbAsyncQueryProvider
+    internal class QueryTranslatorProviderAsync : QueryTranslatorProvider
+#if EF
+        , IDbAsyncQueryProvider
+#else
+        , IQueryProvider
+#endif
     {
         private static readonly TraceSource _ts = new TraceSource(typeof(QueryTranslatorProviderAsync).Name);
         private readonly IEnumerable<ExpressionVisitor> _visitors;
@@ -85,7 +92,7 @@ namespace QueryInterceptor.Core
             return Execute<object>(expression);
         }
 
-#if NETSTANDARD
+#if (EF && NETSTANDARD)
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -135,6 +142,7 @@ namespace QueryInterceptor.Core
 
             cancellationToken.ThrowIfCancellationRequested();
 
+#if EF
             var provider = Source.Provider as IDbAsyncQueryProvider;
             if (provider != null)
             {
@@ -142,6 +150,7 @@ namespace QueryInterceptor.Core
 
                 return provider.ExecuteAsync<TResult>(translated, cancellationToken);
             }
+#endif
 
             // In case Source.Provider is not a IDbAsyncQueryProvider, just start a new Task
             return Task.Factory.StartNew(() => Execute<TResult>(expression), cancellationToken);

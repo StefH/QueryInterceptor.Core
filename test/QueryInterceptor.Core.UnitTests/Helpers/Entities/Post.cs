@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace QueryInterceptor.Core.UnitTests.Helpers.Entities
+namespace QueryInterceptor.UnitTests.Helpers.Entities
 {
     public class Post
     {

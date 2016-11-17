@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace QueryInterceptor.Core.UnitTests.Helpers.Entities
+namespace QueryInterceptor.UnitTests.Helpers.Entities
 {
     public class Blog
     {

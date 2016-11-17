@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QueryInterceptor.Core.UnitTests.Helpers
+namespace QueryInterceptor.UnitTests.Helpers
 {
     public class User
     {
