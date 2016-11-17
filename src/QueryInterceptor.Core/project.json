@@ -1,5 +1,5 @@
 {
-    "version": "1.0.4.0",
+    "version": "1.0.5.0",
     "title": "QueryInterceptor.Core",
     "description": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
     "authors": [ "David Fowler", "Stef Heyenrath" ],
@@ -14,7 +14,7 @@
         "owners": [ "Stef Heyenrath" ],
         "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
         "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
-        "releaseNotes": "Add extensibility point for Expression optimization"
+        "releaseNotes": "Support Microsoft.EntityFrameworkCore 1.1.0"
     },
 
     "dependencies": {
@@ -70,9 +70,10 @@
                 "portable-net451+win81+wpa81"
             ],
             "dependencies": {
-                "Microsoft.CSharp": "4.0.1",
-                "Microsoft.EntityFrameworkCore": "1.0.1",
-                "System.Diagnostics.TraceSource": "4.0.0"
+                "Microsoft.CSharp": "4.3.0",
+                "Microsoft.EntityFrameworkCore": "1.1.0",
+                "System.Diagnostics.TraceSource": "4.0.0",
+                "System.Reflection.TypeExtensions": "4.3.0"
             }
         }
     }

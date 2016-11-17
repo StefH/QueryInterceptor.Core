@@ -7,7 +7,7 @@ namespace QueryInterceptor.Core
     /// Extensibility point: If you want to modify expanded queries before executing them
     /// set your own functionality to override empty QueryOptimizer
     /// </summary>
-    public class ExtensibilityPoint
+    public static class ExtensibilityPoint
     {
         /// <summary>
         /// Place to optimize your queries. Example: Add a reference to Nuget package Linq.Expression.Optimizer 

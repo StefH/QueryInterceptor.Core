@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 namespace System.Data.Entity.Infrastructure
 {
     /// <summary>
-    /// Proxy interface to map IDbAsyncQueryProvider (for NET4.5 and dnxcore50) to IAsyncQueryProvider (used in dnxcore50)
+    /// Proxy interface to map IDbAsyncQueryProvider (for NET4.5 and dotnet) to IAsyncQueryProvider
     /// </summary>
     public interface IDbAsyncQueryProvider : IAsyncQueryProvider
     {
