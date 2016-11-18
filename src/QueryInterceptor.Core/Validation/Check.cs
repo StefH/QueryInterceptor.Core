@@ -43,10 +43,7 @@ namespace QueryInterceptor.Core.Validation
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static T NotNull<T>(
-            [NoEnumeration] T value,
-            [InvokerParameterName] [NotNull] string parameterName,
-            [NotNull] string propertyName)
+        public static T NotNull<T>([NoEnumeration] T value, [InvokerParameterName] [NotNull] string parameterName, [NotNull] string propertyName)
         {
             if (ReferenceEquals(value, null))
             {
@@ -60,7 +57,7 @@ namespace QueryInterceptor.Core.Validation
         }
 
         [ContractAnnotation("value:null => halt")]
-        public static IReadOnlyList<T> NotEmpty<T>(IReadOnlyList<T> value, [InvokerParameterName] [NotNull] string parameterName)
+        public static IList<T> NotEmpty<T>(IList<T> value, [InvokerParameterName] [NotNull] string parameterName)
         {
             NotNull(value, parameterName);
 
@@ -99,8 +96,7 @@ namespace QueryInterceptor.Core.Validation
 
         public static string NullButNotEmpty(string value, [InvokerParameterName] [NotNull] string parameterName)
         {
-            if (!ReferenceEquals(value, null)
-                && (value.Length == 0))
+            if (!ReferenceEquals(value, null) && (value.Length == 0))
             {
                 NotEmpty(parameterName, nameof(parameterName));
 
@@ -110,7 +106,7 @@ namespace QueryInterceptor.Core.Validation
             return value;
         }
 
-        public static IReadOnlyList<T> HasNoNulls<T>(IReadOnlyList<T> value, [InvokerParameterName] [NotNull] string parameterName)
+        public static IList<T> HasNoNulls<T>(IList<T> value, [InvokerParameterName] [NotNull] string parameterName)
             where T : class
         {
             NotNull(value, parameterName);

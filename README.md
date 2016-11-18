@@ -1,13 +1,17 @@
-#QueryInterceptor.Core
+#QueryInterceptor
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/queryinterceptor-core)
 
-[![Version](https://img.shields.io/nuget/v/QueryInterceptor.Core.svg)](https://www.nuget.org/packages/QueryInterceptor.Core)
+| Project | NuGet | Dependency |
+| ------- | ----- | ---------- |
+| QueryInterceptor.Core | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.Core.svg)](https://www.nuget.org/packages/QueryInterceptor.Core) | - |
+| QueryInterceptor.EntityFramework | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFramework.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFramework) | EntityFramework |
 
 Forked from :
 https://github.com/davidfowl/QueryInterceptor with support for .Net Core.
 
 The following frameworks are supported
+* net40
 * net45
 * net45x
 * net46x

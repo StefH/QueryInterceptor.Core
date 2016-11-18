@@ -1,9 +1,17 @@
 ﻿{
     "version": "1.0.6.0",
-    "title": "QueryInterceptor.EF.Core",
-    "description": "Exposes a generic extension method to IQueryable<T> that allows interception of expression trees with expression visitors.",
+    "title": "QueryInterceptor.EntityFramework",
+    "description": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
     "authors": [ "David Fowler", "Stef Heyenrath" ],
-    "releasenotes": "",
+
+    "packOptions": {
+        "summary": "Exposes a generic extension method to IQueryable<T> that allows interception of expression trees with expression visitors.",
+        "tags": [ "linq", "provider", "query", "intercept", "expression", "expressionvisitor", "visitor" ],
+        "owners": [ "Stef Heyenrath" ],
+        "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
+        "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
+        "releaseNotes": "Support Microsoft.EntityFrameworkCore 1.1.0"
+    },
 
     "buildOptions": {
         "define": [ "EF" ],
@@ -16,15 +24,6 @@
                 "../QueryInterceptor.Core/*/AssemblyInfo.cs"
             ]
         }
-    },
-
-    "packOptions": {
-        "summary": "Exposes a generic extension method to IQueryable<T> that allows interception of expression trees with expression visitors.",
-        "tags": [ "linq", "provider", "query", "intercept", "expression", "expressionvisitor", "visitor" ],
-        "owners": [ "Stef Heyenrath" ],
-        "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
-        "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
-        "releaseNotes": "Support Microsoft.EntityFrameworkCore 1.1.0"
     },
 
     "dependencies": {

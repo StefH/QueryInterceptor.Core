@@ -1,12 +1,8 @@
 {
     "version": "1.0.5.0",
     "title": "QueryInterceptor.Core",
-    "description": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
+    "description": "Exposes a generic extension method to IQueryable<T> that allows interception of expression trees with expression visitors.",
     "authors": [ "David Fowler", "Stef Heyenrath" ],
-    "releasenotes": "",
-
-    "buildOptions": {
-    },
 
     "packOptions": {
         "summary": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
@@ -17,6 +13,9 @@
         "releaseNotes": "Remove dependency on EntityFrameworkCore"
     },
 
+    "buildOptions": {
+    },
+
     "dependencies": {
         "JetBrains.Annotations": {
             "version": "10.1.4",
@@ -25,6 +24,8 @@
     },
 
     "frameworks": {
+        "net40": {
+        },
         "net45": {
         },
         "net451": {
@@ -57,7 +58,7 @@
             "dependencies": {
                 "Microsoft.CSharp": "4.3.0",
                 "System.Diagnostics.Debug": "4.3.0",
-                "System.Diagnostics.TraceSource": "4.0.0",
+                "System.Diagnostics.TraceSource": "4.3.0",
                 "System.Globalization": "4.3.0",
                 "System.Linq": "4.3.0",
                 "System.Reflection.TypeExtensions": "4.3.0"

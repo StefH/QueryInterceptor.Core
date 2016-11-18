@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-#if EF
-using System.Data.Entity.Infrastructure;
-#endif
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using QueryInterceptor.Core.Validation;
-using System.Reflection;
 using JetBrains.Annotations;
 
 namespace QueryInterceptor.Core
 {
     internal class QueryTranslatorProviderAsync : QueryTranslatorProvider
 #if EF
-        , IDbAsyncQueryProvider
+        , System.Data.Entity.Infrastructure.IDbAsyncQueryProvider
 #else
         , IQueryProvider
 #endif
@@ -97,7 +94,7 @@ namespace QueryInterceptor.Core
         {
             Check.NotNull(expression, nameof(expression));
 
-            var provider = Source.Provider as IDbAsyncQueryProvider;
+            var provider = Source.Provider as System.Data.Entity.Infrastructure.IDbAsyncQueryProvider;
             if (provider != null)
             {
                 var translated = VisitAllAndOptimize(expression);
@@ -143,7 +140,7 @@ namespace QueryInterceptor.Core
             cancellationToken.ThrowIfCancellationRequested();
 
 #if EF
-            var provider = Source.Provider as IDbAsyncQueryProvider;
+            var provider = Source.Provider as System.Data.Entity.Infrastructure.IDbAsyncQueryProvider;
             if (provider != null)
             {
                 var translated = VisitAllAndOptimize(expression);
