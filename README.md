@@ -1,6 +1,6 @@
-#QueryInterceptor
+# QueryInterceptor.Core
 
-[![Build status](https://ci.appveyor.com/api/projects/status/0c4v2bsvdqd57600?svg=true)](https://ci.appveyor.com/project/StefH/queryinterceptor-core)
+[![Build status](https://ci.appveyor.com/api/projects/status/6xwk4b7vhmcis718?svg=true)](https://ci.appveyor.com/project/StefH/queryinterceptor-core)
 
 | Project | NuGet | Dependency |
 | ------- | ----- | ---------- |
