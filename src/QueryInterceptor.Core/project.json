@@ -1,5 +1,5 @@
 {
-    "version": "1.0.5.0",
+    "version": "1.0.6.0",
     "title": "QueryInterceptor.Core",
     "description": "Exposes a generic extension method to IQueryable<T> that allows interception of expression trees with expression visitors.",
     "authors": [ "David Fowler", "Stef Heyenrath" ],
@@ -10,7 +10,7 @@
         "owners": [ "Stef Heyenrath" ],
         "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",
         "licenseUrl": "https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE",
-        "releaseNotes": "Remove dependency on EntityFrameworkCore"
+        "releaseNotes": "Support async IQueryable"
     },
 
     "buildOptions": {
@@ -18,7 +18,7 @@
 
     "dependencies": {
         "JetBrains.Annotations": {
-            "version": "10.1.4",
+            "version": "10.4.0",
             "type": "build"
         }
     },
@@ -28,32 +28,9 @@
         },
         "net45": {
         },
-        "net451": {
-        },
-        "net452": {
-        },
-        "net46": {
-        },
-        "net461": {
-        },
         "netstandard1.3": {
             "buildOptions": { "define": [ "NETSTANDARD" ] },
-            "NETStandard.Library": {
-                "version": "1.6.0"
-            },
             "imports": [
-                "dotnet5.4",
-                "portable-win81+wp81",
-                "portable-net45+wp8",
-                "portable-net45+win8+wp8",
-                "portable-wp81+wpa81",
-                "portable-win81+wp81+wpa81",
-                "portable-net45+win8+wpa81+wp8",
-                "portable-net45+win8",
-                "portable-net45+win8+wpa81",
-                "portable-win81+wpa81",
-                "portable-net451+win81",
-                "portable-net451+win81+wpa81"
             ],
             "dependencies": {
                 "Microsoft.CSharp": "4.3.0",

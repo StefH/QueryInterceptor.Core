@@ -12,9 +12,7 @@ https://github.com/davidfowl/QueryInterceptor with support for .Net Core.
 
 The following frameworks are supported
 * net40
-* net45
-* net45x
-* net46x
+* net45 and up
 * netstandard1.3
 
 ## The problem

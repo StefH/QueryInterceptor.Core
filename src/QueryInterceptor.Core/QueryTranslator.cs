@@ -19,6 +19,9 @@ namespace QueryInterceptor.Core
     }
 
     internal class QueryTranslator<T> : IOrderedQueryable<T>
+#if EF
+        , IAsyncEnumerable<T>
+#endif
     {
         private readonly Expression _expression;
         private readonly QueryTranslatorProviderAsync _provider;
@@ -70,6 +73,18 @@ namespace QueryInterceptor.Core
             return ((IEnumerable<T>)_provider.ExecuteEnumerable(_expression)).GetEnumerator();
         }
 
+#if (EF)
+        /// <summary>
+        /// Returns an enumerator that iterates through a collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+        /// </returns>
+        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
+        {
+            return _provider.ExecuteAsync<T>(_expression).GetEnumerator();
+        }
+#endif
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
         /// </summary>

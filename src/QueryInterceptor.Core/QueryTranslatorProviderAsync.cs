@@ -55,6 +55,7 @@ namespace QueryInterceptor.Core
         /// </summary>
         /// <param name="expression">An expression tree that represents a LINQ query.</param>
         /// <returns>An <see cref="T:System.Linq.IQueryable" /> that can evaluate the query represented by the specified expression tree.</returns>
+        [PublicAPI]
         public IQueryable CreateQuery(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -68,6 +69,7 @@ namespace QueryInterceptor.Core
         /// </summary>
         /// <param name="expression">An expression tree that represents a LINQ query.</param>
         /// <returns>The value that results from executing the specified query.</returns>
+        [PublicAPI]
         public TResult Execute<TResult>(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -82,6 +84,7 @@ namespace QueryInterceptor.Core
         /// </summary>
         /// <param name="expression">An expression tree that represents a LINQ query.</param>
         /// <returns>The value that results from executing the specified query.</returns>
+        [PublicAPI]
         public object Execute(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -89,8 +92,14 @@ namespace QueryInterceptor.Core
             return Execute<object>(expression);
         }
 
-#if (EF && NETSTANDARD)
-        public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
+#if (EF)
+        /// <summary>
+        /// Executes the query (async) represented by a specified expression tree.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
+        /// </returns>
+        public IAsyncEnumerable<TResult> ExecuteAsync<TResult>([NotNull] Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
 
@@ -98,8 +107,11 @@ namespace QueryInterceptor.Core
             if (provider != null)
             {
                 var translated = VisitAllAndOptimize(expression);
-
+#if NETSTANDARD
                 return provider.ExecuteAsync<TResult>(translated);
+#else
+                return ((dynamic)Source.Provider).ExecuteAsync<TResult>(translated);
+#endif
             }
 
             // In case Source.Provider is not a IDbAsyncQueryProvider, just execute normal
@@ -115,6 +127,7 @@ namespace QueryInterceptor.Core
         /// A task that represents the asynchronous operation.
         /// The task result contains the value that results from executing the specified query.
         /// </returns>
+        [PublicAPI]
         public Task<TResult> ExecuteAsync<TResult>(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -133,6 +146,7 @@ namespace QueryInterceptor.Core
         /// A task that represents the asynchronous operation.
         /// The task result contains the value that results from executing the specified query.
         /// </returns>
+        [PublicAPI]
         public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
             Check.NotNull(expression, nameof(expression));
@@ -161,6 +175,7 @@ namespace QueryInterceptor.Core
         /// A task that represents the asynchronous operation.
         /// The task result contains the value that results from executing the specified query.
         /// </returns>
+        [PublicAPI]
         public Task<object> ExecuteAsync(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -178,6 +193,7 @@ namespace QueryInterceptor.Core
         /// A task that represents the asynchronous operation.
         /// The task result contains the value that results from executing the specified query.
         /// </returns>
+        [PublicAPI]
         public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
         {
             Check.NotNull(expression, nameof(expression));
