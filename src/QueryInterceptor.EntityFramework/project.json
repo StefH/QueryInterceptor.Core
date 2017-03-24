@@ -5,7 +5,7 @@
     "authors": [ "David Fowler", "Stef Heyenrath" ],
 
     "packOptions": {
-        "summary": "Exposes a generic extension method to IQueryable<T> that allows interception of expression trees with expression visitors.",
+        "summary": "Exposes a generic extension method to IQueryable<T> and IDbAsyncQueryProvider<T> that allows interception of expression trees with expression visitors.",
         "tags": [ "linq", "provider", "query", "intercept", "expression", "expressionvisitor", "visitor" ],
         "owners": [ "Stef Heyenrath" ],
         "projectUrl": "https://github.com/StefH/QueryInterceptor.Core",

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using Newtonsoft.Json;
+using QueryInterceptor.Core.ConsoleApp.net452.Database;
 
 namespace QueryInterceptor.Core.ConsoleApp.net452
 {
@@ -37,7 +40,7 @@ namespace QueryInterceptor.Core.ConsoleApp.net452
             Console.WriteLine("numbersOdd  > 0 = {0}", string.Join(", ", numbersOdd));
 
 
-            Console.WriteLine(new String('-', 80));
+            Console.WriteLine(new string('-', 80));
 
 
             Console.WriteLine("Enable ExpressionOptimizer");
@@ -50,6 +53,13 @@ namespace QueryInterceptor.Core.ConsoleApp.net452
             numbersOdd = query.InterceptWith(visitor).Where(x => x >= 0).ToList();
             Console.WriteLine("numbersOdd  > 0 = {0}", string.Join(", ", numbersOdd));
 
+            var ctx = new NorthwindModel();
+
+            var car = ctx.Cars.AsQueryable().InterceptWith(visitor).Where(x => x.Key >= 0).FirstOrDefault();
+            Console.WriteLine("car      {0}", JsonConvert.SerializeObject(car));
+
+            var carAsync = ctx.Cars.AsQueryable().InterceptWith(visitor).Where(x => x.Key >= 0).FirstOrDefaultAsync();
+            Console.WriteLine("carAsync {0}", JsonConvert.SerializeObject(carAsync.Result));
 
             Console.WriteLine("Press key...");
             Console.ReadLine();
