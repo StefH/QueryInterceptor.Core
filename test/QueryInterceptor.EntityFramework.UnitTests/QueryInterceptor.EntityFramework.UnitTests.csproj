@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyTitle>QueryInterceptor.EntityFramework.UnitTests</AssemblyTitle>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);EF</DefineConstants>
+    <AssemblyName>QueryInterceptor.EntityFramework.UnitTests</AssemblyName>
+    <PackageId>QueryInterceptor.EntityFramework.UnitTests</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\QueryInterceptor.Core.UnitTests\*\AssemblyInfo.cs" />
+    <Compile Include="..\QueryInterceptor.Core.UnitTests\*.cs;..\QueryInterceptor.Core.UnitTests\*\*.cs;..\QueryInterceptor.Core.UnitTests\*\*\*.cs" Exclude="..\QueryInterceptor.Core.UnitTests\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFramework\QueryInterceptor.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>QueryInterceptor.Core.ConsoleApp</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>QueryInterceptor.Core.ConsoleApp</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\QueryInterceptor.Core\QueryInterceptor.Core.csproj" />
+  </ItemGroup>
+
+</Project>
