@@ -5,7 +5,7 @@
 | Project | NuGet | Dependency |
 | ------- | ----- | ---------- |
 | QueryInterceptor.Core | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.Core.svg)](https://www.nuget.org/packages/QueryInterceptor.Core) | - |
-| QueryInterceptor.EntityFramework | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFramework.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFramework) | EntityFramework |
+| QueryInterceptor.EntityFramework | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFramework.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFramework) | EntityFramework or Microsoft.EntityFrameworkCore |
 
 Forked from :
 https://github.com/davidfowl/QueryInterceptor with support for .Net Core.
@@ -14,6 +14,7 @@ The following frameworks are supported
 * net40
 * net45 and up
 * netstandard1.3
+* netstandard2.0
 
 ## The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.
