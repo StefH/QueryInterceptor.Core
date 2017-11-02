@@ -5,7 +5,8 @@
 | Project | NuGet | Dependency |
 | ------- | ----- | ---------- |
 | QueryInterceptor.Core | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.Core.svg)](https://www.nuget.org/packages/QueryInterceptor.Core) | - |
-| QueryInterceptor.EntityFramework | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFramework.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFramework) | EntityFramework or Microsoft.EntityFrameworkCore |
+| QueryInterceptor.EntityFramework | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFramework.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFramework) | EntityFramework |
+| QueryInterceptor.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFrameworkCore.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFrameworkCore) | Microsoft.EntityFrameworkCore |
 
 Forked from :
 https://github.com/davidfowl/QueryInterceptor with support for .Net Core.

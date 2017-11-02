@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD
+﻿#if EFCORE
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace System.Data.Entity.Infrastructure
