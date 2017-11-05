@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IDbAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
+    <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
     <VersionPrefix>1.0.1.0</VersionPrefix>
     <Authors>Stef Heyenrath</Authors>
@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncEnumerable.cs" Link="IDbAsyncEnumerable.cs" />
     <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncEnumerator.cs" Link="IDbAsyncEnumerator.cs" />
     <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncQueryProvider.cs" Link="IDbAsyncQueryProvider.cs" />
   </ItemGroup>

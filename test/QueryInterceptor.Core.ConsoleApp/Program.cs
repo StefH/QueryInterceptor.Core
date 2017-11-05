@@ -48,7 +48,13 @@ namespace QueryInterceptor.Core.ConsoleApp
 
             var context = new NorthwindModel();
 
-            context.Database.EnsureCreated();
+            if (context.Database.EnsureCreated())
+            {
+                context.Cars.Add(new Car { Brand = "Ford", Color = "Blue" });
+                context.Cars.Add(new Car { Brand = "Fiat", Color = "Red" });
+                context.Cars.Add(new Car { Brand = "Alfa", Color = "Black" });
+                context.SaveChanges();
+            }
 
             var carFirstOrDefault = context.Cars.AsQueryable().InterceptWith(visitor).Where(x => x.Color == "Blue").FirstOrDefault();
             Console.WriteLine("carFirstOrDefault {0}", JsonConvert.SerializeObject(carFirstOrDefault, Formatting.Indented));
