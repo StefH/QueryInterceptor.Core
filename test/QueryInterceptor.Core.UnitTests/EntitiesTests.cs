@@ -8,8 +8,8 @@ using QueryInterceptor.UnitTests.Helpers.Entities;
 using Xunit;
 using QueryInterceptor.Core;
 
-#if EF
-namespace QueryInterceptor.EntityFramework
+#if EFCORE
+namespace QueryInterceptor.EntityFrameworkCore
 #else
 namespace QueryInterceptor.Core.UnitTests
 #endif

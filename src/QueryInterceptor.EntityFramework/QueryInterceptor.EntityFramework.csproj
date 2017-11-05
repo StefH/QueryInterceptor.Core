@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IDbAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.EntityFramework</AssemblyTitle>
-    <VersionPrefix>1.0.2.0</VersionPrefix>
+    <VersionPrefix>1.0.3.0</VersionPrefix>
     <Authors>David Fowler;Stef Heyenrath</Authors>
     <TargetFrameworks>net45</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EF</DefineConstants>
@@ -22,6 +22,10 @@
   <ItemGroup>
     <Compile Remove="..\QueryInterceptor.Core\*\AssemblyInfo.cs" />
     <Compile Include="..\QueryInterceptor.Core\*.cs;..\QueryInterceptor.Core\*\*.cs" Exclude="..\QueryInterceptor.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\QueryInterceptor.Core\QueryTranslatorProvider.cs" />
   </ItemGroup>
 
   <ItemGroup>

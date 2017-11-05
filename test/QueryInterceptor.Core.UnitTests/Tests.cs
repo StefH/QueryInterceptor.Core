@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.Entity;
 #endif
 
-#if EF
-namespace QueryInterceptor.EntityFramework
+#if EFCORE
+namespace QueryInterceptor.EntityFrameworkCore
 #else
 namespace QueryInterceptor.Core.UnitTests
 #endif

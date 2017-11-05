@@ -12,37 +12,35 @@ using JetBrains.Annotations;
 
 namespace QueryInterceptor.Core
 {
-    internal class QueryTranslatorProviderAsync : QueryTranslatorProvider
-#if EF
+    internal class QueryTranslatorProviderAsync : ExpressionVisitor
+#if EF || EFCORE
         , System.Data.Entity.Infrastructure.IDbAsyncQueryProvider
 #else
         , IQueryProvider
 #endif
     {
-        private static readonly TraceSource _ts = new TraceSource(typeof(QueryTranslatorProviderAsync).Name);
+        private static readonly TraceSource TraceSource = new TraceSource(typeof(QueryTranslatorProviderAsync).Name);
         private readonly IEnumerable<ExpressionVisitor> _visitors;
+
+        internal IQueryable Source { get; }
+
+        public IQueryProvider OriginalProvider { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryTranslatorProviderAsync"/> class.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="visitors">The visitors.</param>
-        public QueryTranslatorProviderAsync(IQueryable source, IEnumerable<ExpressionVisitor> visitors)
-            : base(source)
+        public QueryTranslatorProviderAsync([NotNull] IQueryable source, [NotNull] IEnumerable<ExpressionVisitor> visitors)
         {
-            // ReSharper disable PossibleMultipleEnumeration
+            Check.NotNull(source, nameof(source));
             Check.NotNull(visitors, nameof(visitors));
 
+            Source = source;
+            OriginalProvider = source.Provider;
             _visitors = visitors;
-            // ReSharper restore PossibleMultipleEnumeration
         }
 
-        /// <summary>
-        /// Creates the query.
-        /// </summary>
-        /// <typeparam name="TElement">The type of the element.</typeparam>
-        /// <param name="expression">The expression.</param>
-        /// <returns>IQueryable{TElement}</returns>
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
@@ -50,11 +48,6 @@ namespace QueryInterceptor.Core
             return new QueryTranslator<TElement>(Source, expression, _visitors);
         }
 
-        /// <summary>
-        /// Constructs an <see cref="T:System.Linq.IQueryable" /> object that can evaluate the query represented by a specified expression tree.
-        /// </summary>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <returns>An <see cref="T:System.Linq.IQueryable" /> that can evaluate the query represented by the specified expression tree.</returns>
         [PublicAPI]
         public IQueryable CreateQuery(Expression expression)
         {
@@ -64,11 +57,6 @@ namespace QueryInterceptor.Core
             return (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType), Source, expression, _visitors);
         }
 
-        /// <summary>
-        /// Executes the query represented by a specified expression tree.
-        /// </summary>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <returns>The value that results from executing the specified query.</returns>
         [PublicAPI]
         public TResult Execute<TResult>(Expression expression)
         {
@@ -79,11 +67,6 @@ namespace QueryInterceptor.Core
             return Source.Provider.Execute<TResult>(translated);
         }
 
-        /// <summary>
-        /// Executes the query represented by a specified expression tree.
-        /// </summary>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <returns>The value that results from executing the specified query.</returns>
         [PublicAPI]
         public object Execute(Expression expression)
         {
@@ -92,41 +75,40 @@ namespace QueryInterceptor.Core
             return Execute<object>(expression);
         }
 
-#if (EF)
-        /// <summary>
-        /// Executes the query (async) represented by a specified expression tree.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
-        /// </returns>
+#if EF
+        [PublicAPI]
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>([NotNull] Expression expression)
         {
             Check.NotNull(expression, nameof(expression));
 
-            var provider = Source.Provider as System.Data.Entity.Infrastructure.IDbAsyncQueryProvider;
-            if (provider != null)
+            var dbAsyncQueryProvider = Source.Provider as System.Data.Entity.Infrastructure.IDbAsyncQueryProvider;
+            if (dbAsyncQueryProvider != null)
             {
                 var translated = VisitAllAndOptimize(expression);
-#if NETSTANDARD
-                return provider.ExecuteAsync<TResult>(translated);
-#else
-                return ((dynamic)Source.Provider).ExecuteAsync<TResult>(translated);
-#endif
+                return dbAsyncQueryProvider.ExecuteAsync<TResult>(translated, CancellationToken.None).ToAsyncEnumerable();
             }
 
             // In case Source.Provider is not a IDbAsyncQueryProvider, just execute normal
             return (IAsyncEnumerable<TResult>)Execute<TResult>(expression);
         }
+
+#elif EFCORE
+        [PublicAPI]
+        public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
+        {
+            Check.NotNull(expression, nameof(expression));
+
+            var entityQueryProvider = Source.Provider as Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider;
+            if (entityQueryProvider != null)
+            {
+                var translated = VisitAllAndOptimize(expression);
+                return entityQueryProvider.ExecuteAsync<TResult>(translated);
+            }
+
+            // In case Source.Provider is not a EntityQueryProvider, just execute normal
+            return (IAsyncEnumerable<TResult>)Execute<TResult>(expression);
+        }
 #else
-        /// <summary>
-        /// Asynchronously executes the query represented by a specified expression tree.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// The task result contains the value that results from executing the specified query.
-        /// </returns>
         [PublicAPI]
         public Task<TResult> ExecuteAsync<TResult>(Expression expression)
         {
@@ -136,16 +118,6 @@ namespace QueryInterceptor.Core
         }
 #endif
 
-        /// <summary>
-        /// Asynchronously executes the query represented by a specified expression tree.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <param name="cancellationToken">The cancellation token.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// The task result contains the value that results from executing the specified query.
-        /// </returns>
         [PublicAPI]
         public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
@@ -154,27 +126,25 @@ namespace QueryInterceptor.Core
             cancellationToken.ThrowIfCancellationRequested();
 
 #if EF
-            var provider = Source.Provider as System.Data.Entity.Infrastructure.IDbAsyncQueryProvider;
-            if (provider != null)
+            var dbAsyncQueryProvider = Source.Provider as System.Data.Entity.Infrastructure.IDbAsyncQueryProvider;
+            if (dbAsyncQueryProvider != null)
             {
                 var translated = VisitAllAndOptimize(expression);
-
-                return provider.ExecuteAsync<TResult>(translated, cancellationToken);
+                return dbAsyncQueryProvider.ExecuteAsync<TResult>(translated, cancellationToken);
+            }
+#elif EFCORE
+            var entityQueryProvider = Source.Provider as Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider;
+            if (entityQueryProvider != null)
+            {
+                var translated = VisitAllAndOptimize(expression);
+                return entityQueryProvider.ExecuteAsync<TResult>(translated, cancellationToken);
             }
 #endif
 
-            // In case Source.Provider is not a IDbAsyncQueryProvider, just start a new Task
+            // In case Source.Provider is not a IDbAsyncQueryProvider or EntityQueryProvider, just start a new Task
             return Task.Factory.StartNew(() => Execute<TResult>(expression), cancellationToken);
         }
 
-        /// <summary>
-        /// Asynchronously executes the query represented by a specified expression tree.
-        /// </summary>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// The task result contains the value that results from executing the specified query.
-        /// </returns>
         [PublicAPI]
         public Task<object> ExecuteAsync(Expression expression)
         {
@@ -183,16 +153,6 @@ namespace QueryInterceptor.Core
             return ExecuteAsync(expression, CancellationToken.None);
         }
 
-        /// <summary>
-        /// Asynchronously executes the query represented by a specified expression tree.
-        /// </summary>
-        /// <param name="expression">An expression tree that represents a LINQ query.</param>
-        /// <param name="cancellationToken">A
-        /// <see cref="T:System.Threading.CancellationToken" /> to observe while waiting for the task to complete.</param>
-        /// <returns>
-        /// A task that represents the asynchronous operation.
-        /// The task result contains the value that results from executing the specified query.
-        /// </returns>
         [PublicAPI]
         public Task<object> ExecuteAsync(Expression expression, CancellationToken cancellationToken)
         {
@@ -226,9 +186,7 @@ namespace QueryInterceptor.Core
         /// Visits the <see cref="T:System.Linq.Expressions.ConstantExpression" />.
         /// </summary>
         /// <param name="node">The expression to visit.</param>
-        /// <returns>
-        /// The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.
-        /// </returns>
+        /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
         protected override Expression VisitConstant(ConstantExpression node)
         {
             Check.NotNull(node, nameof(node));
@@ -236,7 +194,7 @@ namespace QueryInterceptor.Core
             // Fix up the Expression tree to work with the underlying LINQ provider
             if (node.Type.GetTypeInfo().IsGenericType && node.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
-                var provider = ((IQueryable)node.Value).Provider as QueryTranslatorProvider;
+                var provider = ((IQueryable)node.Value).Provider as QueryTranslatorProviderAsync;
 
                 if (provider != null)
                 {
@@ -257,8 +215,8 @@ namespace QueryInterceptor.Core
 
                 if (optimized != expression)
                 {
-                    _ts.TraceEvent(TraceEventType.Verbose, 0, "Expression before : {0}", expression);
-                    _ts.TraceEvent(TraceEventType.Verbose, 0, "Expression after  : {0}", optimized);
+                    TraceSource.TraceEvent(TraceEventType.Verbose, 0, "Expression before : {0}", expression);
+                    TraceSource.TraceEvent(TraceEventType.Verbose, 0, "Expression after  : {0}", optimized);
                 }
 
                 return optimized;
