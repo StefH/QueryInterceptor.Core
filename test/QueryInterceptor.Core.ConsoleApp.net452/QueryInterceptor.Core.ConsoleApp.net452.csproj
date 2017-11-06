@@ -88,6 +88,8 @@
     <Compile Include="Database\Order.cs" />
     <Compile Include="Database\Order_Detail.cs" />
     <Compile Include="Database\Product.cs" />
+    <Compile Include="EqualsToNotEqualsVisitor.cs" />
+    <Compile Include="EqualsToNotEqualsVisitorFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Database\Region.cs" />

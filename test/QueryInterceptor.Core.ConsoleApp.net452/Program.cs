@@ -2,33 +2,16 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 using Newtonsoft.Json;
 using QueryInterceptor.Core.ConsoleApp.net452.Database;
 
 namespace QueryInterceptor.Core.ConsoleApp.net452
 {
-    public class EqualsToNotEqualsVisitor : ExpressionVisitor
-    {
-        protected override Expression VisitBinary(BinaryExpression node)
-        {
-            if (node.NodeType == ExpressionType.Equal)
-            {
-                // Change == to != and add dummy
-                int seven = 7;
-
-                return Expression.AndAlso(Expression.NotEqual(node.Left, node.Right), Expression.Equal(Expression.Constant(7), Expression.Constant(seven)));
-            }
-
-            return base.VisitBinary(node);
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
         {
-            var visitor = new EqualsToNotEqualsVisitor();
+            var visitor = EqualsToNotEqualsVisitorFactory.EqualsToNotEqualsVisitor;
 
             Console.WriteLine("Hello QueryInterceptor.Core.ConsoleApp.net452");
 
