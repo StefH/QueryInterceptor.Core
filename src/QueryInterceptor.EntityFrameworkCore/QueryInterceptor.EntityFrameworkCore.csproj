@@ -1,9 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
-    <VersionPrefix>1.0.1.0</VersionPrefix>
     <Authors>Stef Heyenrath</Authors>
     <TargetFrameworks>net451;netstandard1.3;netstandard2.0</TargetFrameworks>
     <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
@@ -16,6 +15,13 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -50,7 +56,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
   </ItemGroup>
 

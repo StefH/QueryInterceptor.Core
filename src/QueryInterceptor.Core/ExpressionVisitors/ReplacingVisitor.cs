@@ -10,8 +10,8 @@ namespace QueryInterceptor.Core.ExpressionVisitors
     /// </summary>
     public class ReplacingVisitor : ExpressionVisitor
     {
-        readonly Func<Expression, bool> _match;
-        readonly Func<Expression, Expression> _createReplacement;
+        private readonly Func<Expression, bool> _match;
+        private readonly Func<Expression, Expression> _createReplacement;
 
         public ReplacingVisitor([NotNull] Expression from, [NotNull] Expression to)
         {
@@ -27,7 +27,9 @@ namespace QueryInterceptor.Core.ExpressionVisitors
             Check.NotNull(node, nameof(node));
 
             if (_match(node))
+            {
                 return _createReplacement(node);
+            }
 
             return base.Visit(node);
         }
