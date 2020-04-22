@@ -93,6 +93,23 @@ namespace QueryInterceptor.Core
         }
 
 #elif EFCORE
+#if EFCORE3
+        //[PublicAPI]
+        //public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        //{
+        //    Check.NotNull(expression, nameof(expression));
+
+        //    var entityQueryProvider = Source.Provider as Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider;
+        //    if (entityQueryProvider != null)
+        //    {
+        //        var translated = VisitAllAndOptimize(expression);
+        //        return entityQueryProvider.ExecuteAsync<TResult>(translated);
+        //    }
+
+        //    // In case Source.Provider is not a EntityQueryProvider, just execute normal
+        //    return Execute<TResult>(expression);
+        //}
+#else
         [PublicAPI]
         public IAsyncEnumerable<TResult> ExecuteAsync<TResult>(Expression expression)
         {
@@ -108,6 +125,7 @@ namespace QueryInterceptor.Core
             // In case Source.Provider is not a EntityQueryProvider, just execute normal
             return (IAsyncEnumerable<TResult>)Execute<TResult>(expression);
         }
+#endif
 #else
         [PublicAPI]
         public Task<TResult> ExecuteAsync<TResult>(Expression expression)
@@ -119,7 +137,13 @@ namespace QueryInterceptor.Core
 #endif
 
         [PublicAPI]
+
+#if EF || EFCORE
+#if EFCORE3
+        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+#else
         public Task<TResult> ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+#endif
         {
             Check.NotNull(expression, nameof(expression));
 
@@ -141,9 +165,26 @@ namespace QueryInterceptor.Core
             }
 #endif
 
+#if EFCORE3
+            return Execute<TResult>(expression);
+#else
             // In case Source.Provider is not a IDbAsyncQueryProvider or EntityQueryProvider, just start a new Task
             return Task.Factory.StartNew(() => Execute<TResult>(expression), cancellationToken);
+#endif
         }
+#endif
+
+
+#if EF || EFCORE
+#if EFCORE3
+        [PublicAPI]
+        public object ExecuteAsync(Expression expression, CancellationToken cancellationToken)
+        {
+            Check.NotNull(expression, nameof(expression));
+
+            return ExecuteAsync<object>(expression, cancellationToken);
+        }
+#else
 
         [PublicAPI]
         public Task<object> ExecuteAsync(Expression expression)
@@ -160,6 +201,8 @@ namespace QueryInterceptor.Core
 
             return ExecuteAsync<object>(expression, cancellationToken);
         }
+#endif
+#endif
 
         internal IEnumerable ExecuteEnumerable([CanBeNull] Expression expression)
         {

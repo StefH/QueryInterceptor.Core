@@ -3,8 +3,8 @@
     <MsBuildAllProjects>$(MsBuildAllProjects);$(MsBuildThisFileFullPath)</MsBuildAllProjects>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <VersionPrefix>1.0.7.0</VersionPrefix>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
 </Project>

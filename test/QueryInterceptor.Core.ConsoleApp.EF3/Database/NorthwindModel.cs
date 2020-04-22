@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace QueryInterceptor.Core.ConsoleApp.Database
+namespace QueryInterceptor.Core.ConsoleApp.EF3.Database
 {
     public class NorthwindModel : DbContext
     {

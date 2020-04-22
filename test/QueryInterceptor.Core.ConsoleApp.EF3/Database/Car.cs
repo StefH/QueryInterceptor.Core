@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Linq.PropertyTranslator.Core;
 
-namespace QueryInterceptor.Core.ConsoleApp.Database
+namespace QueryInterceptor.Core.ConsoleApp.EF3.Database
 {
     public class Car
     {

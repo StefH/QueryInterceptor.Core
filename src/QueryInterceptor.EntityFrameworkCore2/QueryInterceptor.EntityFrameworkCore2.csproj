@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Version>2.0.0.0</Version>
+    <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
+    <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
+    <AssemblyName>QueryInterceptor.EntityFrameworkCore</AssemblyName>
+    <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
+    <PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
+    <PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE</PackageLicenseUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="..\QueryInterceptor.Core\*\AssemblyInfo.cs" />
+    <Compile Include="..\QueryInterceptor.Core\*.cs;..\QueryInterceptor.Core\*\*.cs" Exclude="..\QueryInterceptor.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncEnumerator.cs" Link="IDbAsyncEnumerator.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncQueryProvider.cs" Link="IDbAsyncQueryProvider.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="10.4.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

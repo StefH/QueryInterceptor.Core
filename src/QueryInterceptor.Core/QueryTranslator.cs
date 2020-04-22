@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using QueryInterceptor.Core.Validation;
 
 namespace QueryInterceptor.Core
@@ -79,10 +80,17 @@ namespace QueryInterceptor.Core
         }
 #endif
 #if EFCORE
+#if EFCORE3
+        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return new QueryTranslatorDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
+        }
+#else
         IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
         {
             return new QueryTranslatorDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
         }
+#endif
 #endif
 
 #if EF

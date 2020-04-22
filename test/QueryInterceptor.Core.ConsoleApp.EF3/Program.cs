@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Linq.PropertyTranslator.Core;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using QueryInterceptor.Core.ConsoleApp.Database;
+using QueryInterceptor.Core.ConsoleApp.EF3.Database;
 
-namespace QueryInterceptor.Core.ConsoleApp
+namespace QueryInterceptor.Core.ConsoleApp.EF3
 {
     public class EqualsToNotEqualsVisitor : ExpressionVisitor
     {

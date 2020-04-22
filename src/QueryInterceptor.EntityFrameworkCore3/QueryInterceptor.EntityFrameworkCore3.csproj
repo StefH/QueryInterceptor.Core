@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Version>3.0.0.0</Version>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFrameworks>net451;netstandard1.3;netstandard2.0</TargetFrameworks>
-    <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <DefineConstants>$(DefineConstants);EFCORE;EFCORE3</DefineConstants>
     <AssemblyName>QueryInterceptor.EntityFrameworkCore</AssemblyName>
     <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
     <PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
@@ -41,22 +42,13 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.3" />
-    <PackageReference Include="System.Interactive.Async" Version="3.1.1" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.3" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
-   <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
   </ItemGroup>
 
