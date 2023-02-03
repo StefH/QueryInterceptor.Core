@@ -1,7 +1,7 @@
 # QueryInterceptor.Core
 
 Forked from :
-https://github.com/StefH/QueryInterceptor.Corewith support for .Net Core.
+https://github.com/StefH/QueryInterceptor.Core
 
 The following frameworks are supported
 * net7.0
