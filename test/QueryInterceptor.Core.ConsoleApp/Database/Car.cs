@@ -1,23 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace QueryInterceptor.Core.ConsoleApp.Database
-{
-    public class Car
-    {
+namespace QueryInterceptor.Core.ConsoleApp.Database {
+    public class Car {
         [Key]
         public int Key { get; set; }
 
-        [Required]
         [StringLength(8)]
-        public string Vin { get; set; }
+        public string? Vin { get; set; }
+
+        public string? Year { get; set; }
 
         [Required]
-        public string Year { get; set; }
+        public string Brand { get; set; } = string.Empty;
 
         [Required]
-        public string Brand { get; set; }
-
-        [Required]
-        public string Color { get; set; }
+        public string Color { get; set; } = string.Empty;
     }
 }

@@ -1,23 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>QueryInterceptor.Core.ConsoleApp</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <PackageId>QueryInterceptor.Core.ConsoleApp</PackageId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Authors>Stef Heyenrath</Authors>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>QueryInterceptor.Core.ConsoleApp</AssemblyName>
+		<OutputType>Exe</OutputType>
+		<PackageId>QueryInterceptor.Core.ConsoleApp</PackageId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Linq.Expression.Optimizer" Version="1.0.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore\QueryInterceptor.EntityFrameworkCore.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore\QueryInterceptor.EntityFrameworkCore.csproj" />
+	</ItemGroup>
 
 </Project>
