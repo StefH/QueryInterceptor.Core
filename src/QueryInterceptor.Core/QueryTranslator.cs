@@ -1,29 +1,19 @@
-﻿using System;
+﻿using QueryInterceptor.Core.Validation;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using QueryInterceptor.Core.Validation;
 
-namespace QueryInterceptor.Core
-{
-    internal class QueryTranslator : QueryTranslator<object>
-    {
-        public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors) : base(source, visitors)
-        {
+namespace QueryInterceptor.Core {
+    internal class QueryTranslator : QueryTranslator<object> {
+        public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors) : base(source, visitors) {
         }
 
-        public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors) : base(source, expression, visitors)
-        {
+        public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors) : base(source, expression, visitors) {
         }
     }
 
     internal class QueryTranslator<T> : IOrderedQueryable<T>
-#if EF || EFCORE
+#if EFCORE
         , IAsyncEnumerable<T>
-#endif
-#if EF
-        , System.Data.Entity.Infrastructure.IDbAsyncEnumerable<T>
 #endif
     {
         private readonly Expression _expression;
@@ -34,8 +24,7 @@ namespace QueryInterceptor.Core
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="visitors">The visitors.</param>
-        public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors)
-        {
+        public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors) {
             Check.NotNull(source, nameof(source));
 
             Check.NotNull(visitors, nameof(visitors));
@@ -50,8 +39,7 @@ namespace QueryInterceptor.Core
         /// <param name="source">The source.</param>
         /// <param name="expression">The expression.</param>
         /// <param name="visitors">The visitors.</param>
-        public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors)
-        {
+        public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors) {
             Check.NotNull(source, nameof(source));
             Check.NotNull(expression, nameof(expression));
 
@@ -67,33 +55,13 @@ namespace QueryInterceptor.Core
         /// <returns>
         /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.
         /// </returns>
-        public IEnumerator<T> GetEnumerator()
-        {
+        public IEnumerator<T> GetEnumerator() {
             return ((IEnumerable<T>)_provider.ExecuteEnumerable(_expression)).GetEnumerator();
         }
 
-#if EF
-        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
-        {
-            return _provider.ExecuteAsync<T>(_expression).GetEnumerator();
-        }
-#endif
 #if EFCORE
-        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetEnumerator()
-        {
+        IAsyncEnumerator<T> IAsyncEnumerable<T>.GetAsyncEnumerator(CancellationToken cancellationToken) {
             return new QueryTranslatorDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
-        }
-#endif
-
-#if EF
-        public System.Data.Entity.Infrastructure.IDbAsyncEnumerator<T> GetAsyncEnumerator()
-        {
-            return new QueryTranslatorDbAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
-        }
-
-        System.Data.Entity.Infrastructure.IDbAsyncEnumerator System.Data.Entity.Infrastructure.IDbAsyncEnumerable.GetAsyncEnumerator()
-        {
-            return GetAsyncEnumerator();
         }
 #endif
 
@@ -103,8 +71,7 @@ namespace QueryInterceptor.Core
         /// <returns>
         /// An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.
         /// </returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
+        IEnumerator IEnumerable.GetEnumerator() {
             return _provider.ExecuteEnumerable(_expression).GetEnumerator();
         }
 

@@ -1,10 +1,6 @@
-﻿#if EFCORE
-using Microsoft.EntityFrameworkCore.Query.Internal;
+﻿using Microsoft.EntityFrameworkCore.Query;
 
-namespace System.Data.Entity.Infrastructure
-{
-    internal interface IDbAsyncQueryProvider : IAsyncQueryProvider
-    {
+namespace System.Data.Entity.Infrastructure {
+    internal interface IDbAsyncQueryProvider : IAsyncQueryProvider {
     }
 }
-#endif

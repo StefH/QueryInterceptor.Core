@@ -1,12 +1,7 @@
-﻿using System.Linq;
-using System.Linq.Expressions;
-using JetBrains.Annotations;
-using QueryInterceptor.Core.Validation;
+﻿using System.Linq.Expressions;
 
-namespace QueryInterceptor.Core
-{
-    public static class QueryTranslatorExtensions
-    {
+namespace QueryInterceptor.Core {
+    public static class QueryTranslatorExtensions {
         /// <summary>
         /// An extension method on IQueryable{T} that lets you plug in arbitrary expression visitors.
         /// </summary>
@@ -14,12 +9,7 @@ namespace QueryInterceptor.Core
         /// <param name="source">The source.</param>
         /// <param name="visitors">The visitors.</param>
         /// <returns>IQueryable{T}</returns>
-        public static IQueryable<T> InterceptWith<T>([NotNull] this IQueryable<T> source, [NotNull] params ExpressionVisitor[] visitors)
-        {
-            Check.NotNull(source, nameof(source));
-            Check.NotNull(visitors, nameof(visitors));
-            Check.HasNoNulls(visitors, nameof(visitors));
-
+        public static IQueryable<T> InterceptWith<T>(this IQueryable<T> source, params ExpressionVisitor[] visitors) {
             return new QueryTranslator<T>(source, visitors);
         }
 
@@ -29,12 +19,7 @@ namespace QueryInterceptor.Core
         /// <param name="source">The source.</param>
         /// <param name="visitors">The visitors.</param>
         /// <returns>IQueryable</returns>
-        public static IQueryable InterceptWith([NotNull] this IQueryable source, [NotNull] params ExpressionVisitor[] visitors)
-        {
-            Check.NotNull(source, nameof(source));
-            Check.NotNull(visitors, nameof(visitors));
-            Check.HasNoNulls(visitors, nameof(visitors));
-
+        public static IQueryable InterceptWith(this IQueryable source, params ExpressionVisitor[] visitors) {
             return new QueryTranslator(source, visitors);
         }
     }
