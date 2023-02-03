@@ -1,14 +1,10 @@
-﻿using QueryInterceptor.Core.Validation;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq.Expressions;
 
 namespace QueryInterceptor.Core {
     internal class QueryTranslator : QueryTranslator<object> {
-        public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors) : base(source, visitors) {
-        }
-
-        public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors) : base(source, expression, visitors) {
-        }
+        public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors) : base(source, visitors) { }
+        public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors) : base(source, expression, visitors) { }
     }
 
     internal class QueryTranslator<T> : IOrderedQueryable<T>
@@ -16,8 +12,8 @@ namespace QueryInterceptor.Core {
         , IAsyncEnumerable<T>
 #endif
     {
-        private readonly Expression _expression;
-        private readonly QueryTranslatorProviderAsync _provider;
+        readonly Expression _expression;
+        readonly QueryTranslatorProviderAsync _provider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryTranslator{T}"/> class.
@@ -25,10 +21,6 @@ namespace QueryInterceptor.Core {
         /// <param name="source">The source.</param>
         /// <param name="visitors">The visitors.</param>
         public QueryTranslator(IQueryable source, IEnumerable<ExpressionVisitor> visitors) {
-            Check.NotNull(source, nameof(source));
-
-            Check.NotNull(visitors, nameof(visitors));
-
             _expression = Expression.Constant(this);
             _provider = new QueryTranslatorProviderAsync(source, visitors);
         }
@@ -40,11 +32,6 @@ namespace QueryInterceptor.Core {
         /// <param name="expression">The expression.</param>
         /// <param name="visitors">The visitors.</param>
         public QueryTranslator(IQueryable source, Expression expression, IEnumerable<ExpressionVisitor> visitors) {
-            Check.NotNull(source, nameof(source));
-            Check.NotNull(expression, nameof(expression));
-
-            Check.NotNull(visitors, nameof(visitors));
-
             _expression = expression;
             _provider = new QueryTranslatorProviderAsync(source, visitors);
         }

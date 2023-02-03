@@ -12,13 +12,9 @@ namespace QueryInterceptor.Core {
         }
 
         public ValueTask DisposeAsync() {
-            Dispose();
+            _inner.Dispose();
             GC.SuppressFinalize(this);
             return ValueTask.CompletedTask;
-        }
-
-        public void Dispose() {
-            _inner.Dispose();
         }
 
         public ValueTask<bool> MoveNextAsync() => ValueTask.FromResult(_inner.MoveNext());
