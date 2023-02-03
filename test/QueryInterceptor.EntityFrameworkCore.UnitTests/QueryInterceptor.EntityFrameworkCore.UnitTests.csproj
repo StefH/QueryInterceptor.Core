@@ -1,36 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <AssemblyTitle>QueryInterceptor.EntityFrameworkCore.UnitTests</AssemblyTitle>
-    <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
-    <AssemblyName>QueryInterceptor.EntityFrameworkCore.UnitTests</AssemblyName>
-    <PackageId>QueryInterceptor.EntityFrameworkCore.UnitTests</PackageId>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="..\QueryInterceptor.Core.UnitTests\*\AssemblyInfo.cs" />
-    <Compile Include="..\QueryInterceptor.Core.UnitTests\*.cs;..\QueryInterceptor.Core.UnitTests\*\*.cs;..\QueryInterceptor.Core.UnitTests\*\*\*.cs" Exclude="..\QueryInterceptor.Core.UnitTests\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.4" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore\QueryInterceptor.EntityFrameworkCore.csproj" />
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
-  </PropertyGroup>
-
+	
+	<PropertyGroup>
+		<AssemblyTitle>QueryInterceptor.EntityFrameworkCore.UnitTests</AssemblyTitle>
+		<Authors>Stef Heyenrath</Authors>
+		<TargetFramework>net7.0</TargetFramework>
+		<DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
+		<AssemblyName>QueryInterceptor.EntityFrameworkCore.UnitTests</AssemblyName>
+		<PackageId>QueryInterceptor.EntityFrameworkCore.UnitTests</PackageId>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<Compile Remove="..\QueryInterceptor.Core.UnitTests\*\AssemblyInfo.cs" />
+		<Compile Include="..\QueryInterceptor.Core.UnitTests\*.cs;..\QueryInterceptor.Core.UnitTests\*\*.cs;..\QueryInterceptor.Core.UnitTests\*\*\*.cs" Exclude="..\QueryInterceptor.Core.UnitTests\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
+		<PackageReference Include="xunit" Version="2.4.2" />
+		<PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.355802">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore\QueryInterceptor.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+	
 </Project>

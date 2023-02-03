@@ -1,10 +1,8 @@
 ﻿
 using System;
 
-namespace QueryInterceptor.UnitTests.Helpers.Entities
-{
-    public class Post
-    {
+namespace QueryInterceptor.UnitTests.Helpers.Entities {
+    public class Post {
         public int PostId { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

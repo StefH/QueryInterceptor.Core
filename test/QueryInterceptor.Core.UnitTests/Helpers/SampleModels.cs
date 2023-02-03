@@ -1,37 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace QueryInterceptor.UnitTests.Helpers
-{
-    public class User
-    {
+namespace QueryInterceptor.UnitTests.Helpers {
+    public class User {
         public Guid Id { get; set; }
-
         public string UserName { get; set; }
-
         public int Income { get; set; }
-
         public UserProfile Profile { get; set; }
-
         public List<Role> Roles { get; set; }
 
-        public static IList<User> GenerateSampleModels(int total, bool allowNullableProfiles = false)
-        {
+        public static IList<User> GenerateSampleModels(int total, bool allowNullableProfiles = false) {
             var list = new List<User>();
 
-            for (int i = 0; i < total; i++)
-            {
-                var user = new User
-                {
+            for (int i = 0; i < total; i++) {
+                var user = new User {
                     Id = Guid.NewGuid(),
                     UserName = "User" + i,
                     Income = ((i) % 15) * 100
                 };
 
-                if (!allowNullableProfiles || (i % 8) != 5)
-                {
-                    user.Profile = new UserProfile
-                    {
+                if (!allowNullableProfiles || (i % 8) != 5) {
+                    user.Profile = new UserProfile {
                         FirstName = "FirstName" + i,
                         LastName = "LastName" + i,
                         Age = (i % 50) + 18
@@ -47,8 +36,7 @@ namespace QueryInterceptor.UnitTests.Helpers
         }
     }
 
-    public class UserProfile
-    {
+    public class UserProfile {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -56,8 +44,7 @@ namespace QueryInterceptor.UnitTests.Helpers
         public int? Age { get; set; }
     }
 
-    public class Role
-    {
+    public class Role {
         public static readonly Role[] StandardRoles = {
             new Role { Name="Admin"},
             new Role { Name="User"},
@@ -67,8 +54,7 @@ namespace QueryInterceptor.UnitTests.Helpers
             new Role { Name="A"},
         };
 
-        public Role()
-        {
+        public Role() {
             Id = Guid.NewGuid();
         }
 
@@ -77,8 +63,7 @@ namespace QueryInterceptor.UnitTests.Helpers
         public string Name { get; set; }
     }
 
-    public class SimpleValuesModel
-    {
+    public class SimpleValuesModel {
         public float FloatValue { get; set; }
 
         public decimal DecimalValue { get; set; }

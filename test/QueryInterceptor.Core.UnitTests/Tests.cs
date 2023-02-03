@@ -1,16 +1,10 @@
-﻿using System;
+﻿using QueryInterceptor.Core;
+using QueryInterceptor.Core.ExpressionVisitors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading;
-using QueryInterceptor.Core.ExpressionVisitors;
 using Xunit;
-using QueryInterceptor.Core;
-#if NETSTANDARD
-using Microsoft.EntityFrameworkCore;
-#else
-using System.Data.Entity;
-#endif
 
 #if EFCORE
 namespace QueryInterceptor.EntityFrameworkCore
@@ -18,11 +12,9 @@ namespace QueryInterceptor.EntityFrameworkCore
 namespace QueryInterceptor.Core.UnitTests
 #endif
 {
-    public class Tests
-    {
+    public class Tests {
         [Fact]
-        public void InterceptWith_IQueryable()
-        {
+        public void InterceptWith_IQueryable() {
             IQueryable<int> query = Enumerable.Range(0, 10).AsQueryable().Where(n => n % 2 == 0);
 
             var visitor = new EqualsToNotEqualsVisitor();
@@ -38,8 +30,7 @@ namespace QueryInterceptor.Core.UnitTests
         }
 
         [Fact]
-        public void InterceptWith_TestEqualsToNotEqualsVisitor()
-        {
+        public void InterceptWith_TestEqualsToNotEqualsVisitor() {
             IQueryable<int> query = Enumerable.Range(0, 10).AsQueryable().Where(n => n % 2 == 0);
             List<int> numbersEven = query.ToList();
             Assert.Equal(new List<int> { 0, 2, 4, 6, 8 }, numbersEven);
@@ -49,25 +40,8 @@ namespace QueryInterceptor.Core.UnitTests
             Assert.Equal(new List<int> { 1, 3, 5, 7, 9 }, numbersOdd);
         }
 
-#if EF
         [Fact]
-        public void InterceptWith_TestEqualsToNotEqualsVisitor_FirstAsync()
-        {
-            var queryEven = Enumerable.Range(0, 10).AsQueryable().Where(n => n % 2 == 0).AsQueryable();
-
-            var visitor = new EqualsToNotEqualsVisitor();
-            var queryOdd = queryEven.InterceptWith(visitor);
-
-            var task = queryOdd.FirstAsync(n => n > 5, CancellationToken.None);
-            task.ContinueWith(t => t.Result).Wait();
-
-            Assert.Equal(7, task.Result);
-        }
-#endif
-
-        [Fact]
-        public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCultureIgnoreCase()
-        {
+        public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCultureIgnoreCase() {
             IQueryable<string> query = new List<string> { "A", "a" }.AsQueryable();
 
             var visitor = new StringComparisonVisitor(StringComparison.CurrentCultureIgnoreCase);
@@ -80,8 +54,7 @@ namespace QueryInterceptor.Core.UnitTests
         }
 
         [Fact]
-        public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCulture()
-        {
+        public void InterceptWith_TestSetComparerExpressionVisitor_CurrentCulture() {
             IQueryable<string> query = new List<string> { "A", "a" }.AsQueryable();
 
             var visitor = new StringComparisonVisitor(StringComparison.CurrentCulture);

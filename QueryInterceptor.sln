@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44DC98CA-394C-4053-8F2A-3C9020FB2B27}"
 EndProject
@@ -23,8 +23,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.Core.UnitTests", "test\QueryInterceptor.Core.UnitTests\QueryInterceptor.Core.UnitTests.csproj", "{C775F733-220E-426D-A851-6F6BF338AA2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryInterceptor.Core.ConsoleApp.net452", "test\QueryInterceptor.Core.ConsoleApp.net452\QueryInterceptor.Core.ConsoleApp.net452.csproj", "{F14D722D-BE92-47EB-838C-7541C9298F88}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFramework", "src\QueryInterceptor.EntityFramework\QueryInterceptor.EntityFramework.csproj", "{2DB5E303-B891-4C55-98BF-F0CD867301D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore", "src\QueryInterceptor.EntityFrameworkCore\QueryInterceptor.EntityFrameworkCore.csproj", "{83D75FEF-0128-4E9A-B084-52C88142665C}"
 EndProject
@@ -54,10 +52,6 @@ Global
 		{F14D722D-BE92-47EB-838C-7541C9298F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F14D722D-BE92-47EB-838C-7541C9298F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F14D722D-BE92-47EB-838C-7541C9298F88}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DB5E303-B891-4C55-98BF-F0CD867301D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DB5E303-B891-4C55-98BF-F0CD867301D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DB5E303-B891-4C55-98BF-F0CD867301D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DB5E303-B891-4C55-98BF-F0CD867301D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83D75FEF-0128-4E9A-B084-52C88142665C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83D75FEF-0128-4E9A-B084-52C88142665C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D75FEF-0128-4E9A-B084-52C88142665C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,7 +69,6 @@ Global
 		{EE84500A-991D-442C-AD23-4385056F3777} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{C775F733-220E-426D-A851-6F6BF338AA2B} = {FD85C438-5AFB-4F76-833D-D675EBA274F9}
 		{F14D722D-BE92-47EB-838C-7541C9298F88} = {5F0BE9AA-801D-4D67-B349-B0EBD613E413}
-		{2DB5E303-B891-4C55-98BF-F0CD867301D3} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{83D75FEF-0128-4E9A-B084-52C88142665C} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{3630D397-03DA-4848-BCAF-8233A03A142F} = {FD85C438-5AFB-4F76-833D-D675EBA274F9}
 	EndGlobalSection
