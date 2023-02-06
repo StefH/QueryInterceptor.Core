@@ -1,28 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
 		<AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
-		<Authors>Stef Heyenrath</Authors>
+		<Authors>Theo Harkes</Authors>
 		<DefineConstants>$(DefineConstants);EFCORE</DefineConstants>
-		<AssemblyName>QueryInterceptor.EntityFrameworkCore</AssemblyName>
-		<PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
+		<AssemblyName>QueryInterceptor.EntityFrameworkCore7</AssemblyName>
+		<PackageId>QueryInterceptor.EntityFrameworkCore7</PackageId>
 		<PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
-		<PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
-		<PackageLicenseUrl>https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/atharkes/QueryInterceptor.Core</PackageProjectUrl>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
 		<SignAssembly>true</SignAssembly>
 		<DelaySign>false</DelaySign>
 		<AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RepositoryUrl>https://github.com/atharkes/QueryInterceptor.Core</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
@@ -30,7 +30,17 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <WarningLevel>7</WarningLevel>
+	</PropertyGroup>
+
 	<ItemGroup>
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+		<None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
 		<Compile Remove="..\QueryInterceptor.Core\*\AssemblyInfo.cs" />
 		<Compile Include="..\QueryInterceptor.Core\*.cs;..\QueryInterceptor.Core\*\*.cs" Exclude="..\QueryInterceptor.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
 	</ItemGroup>
