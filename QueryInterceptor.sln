@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44DC98CA-394C-4053-8F2A-3C9020FB2B27}"
 EndProject
@@ -37,6 +37,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore2", "src\QueryInterceptor.EntityFrameworkCore2\QueryInterceptor.EntityFrameworkCore2.csproj", "{85925F94-0F55-4C14-8F58-693CAD6D66CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore3", "src\QueryInterceptor.EntityFrameworkCore3\QueryInterceptor.EntityFrameworkCore3.csproj", "{BAD2CDAB-2A41-4B3C-910E-9B29363A1B4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore7", "src\QueryInterceptor.EntityFrameworkCore7\QueryInterceptor.EntityFrameworkCore7.csproj", "{AD01F92B-025C-4ECA-8829-84B2721E7181}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +86,10 @@ Global
 		{BAD2CDAB-2A41-4B3C-910E-9B29363A1B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAD2CDAB-2A41-4B3C-910E-9B29363A1B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAD2CDAB-2A41-4B3C-910E-9B29363A1B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD01F92B-025C-4ECA-8829-84B2721E7181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD01F92B-025C-4ECA-8829-84B2721E7181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD01F92B-025C-4ECA-8829-84B2721E7181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD01F92B-025C-4ECA-8829-84B2721E7181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{EBD81598-AA2E-4130-9DF7-8EA12443FAEF} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{85925F94-0F55-4C14-8F58-693CAD6D66CE} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{BAD2CDAB-2A41-4B3C-910E-9B29363A1B4C} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
+		{AD01F92B-025C-4ECA-8829-84B2721E7181} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09C56576-C368-4200-96CA-851C111EF8B9}
