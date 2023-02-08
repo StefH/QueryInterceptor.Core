@@ -7,7 +7,7 @@
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
 		<AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
 		<Authors>Stef Heyenrath</Authors>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net6;net7</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);EFCORE7</DefineConstants>
@@ -23,18 +23,15 @@
 		<SignAssembly>true</SignAssembly>
 		<DelaySign>false</DelaySign>
 		<AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>QueryInterceptor.Core</RootNamespace>
 	</PropertyGroup>
-
-	<!--<ItemGroup>
-		<Compile Remove="..\QueryInterceptor.Core\*\AssemblyInfo.cs" />
-		<Compile Include="..\QueryInterceptor.Core\*.cs;..\QueryInterceptor.Core\*\*.cs" Exclude="..\QueryInterceptor.Core\*\AssemblyInfo.cs;bin\**;obj\**;**\*.xproj;packages\**" />
-	</ItemGroup>-->
 
 	<ItemGroup>
 		<Compile Include="..\QueryInterceptor.Core\Compatibility\IntrospectionExtensions.cs" Link="Compatibility\IntrospectionExtensions.cs" />
 		<Compile Include="..\QueryInterceptor.Core\ExpressionVisitors\EqualsToNotEqualsVisitor.cs" Link="ExpressionVisitors\EqualsToNotEqualsVisitor.cs" />
 		<Compile Include="..\QueryInterceptor.Core\ExpressionVisitors\ReplacingVisitor.cs" Link="ExpressionVisitors\ReplacingVisitor.cs" />
 		<Compile Include="..\QueryInterceptor.Core\ExpressionVisitors\StringComparisonVisitor.cs" Link="ExpressionVisitors\StringComparisonVisitor.cs" />
+		<Compile Include="..\QueryInterceptor.Core\ExtensibilityPoint.cs" Link="ExtensibilityPoint.cs" />
 		<Compile Include="..\QueryInterceptor.Core\QueryTranslatorExtensions.cs" Link="QueryTranslatorExtensions.cs" />
 		<Compile Include="..\QueryInterceptor.Core\Validation\Check.cs" Link="Validation\Check.cs" />
 		<Compile Include="..\QueryInterceptor.Core\Validation\CoreStrings.cs" Link="Validation\CoreStrings.cs" />
