@@ -1,4 +1,4 @@
-﻿#if EFCORE || EFCORE7
+﻿#if EFCORE || EFCORE_6_UP
 using System.Collections.Generic;
 
 namespace System.Data.Entity.Infrastructure {
