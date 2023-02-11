@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFram
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore6", "src\QueryInterceptor.EntityFrameworkCore6\QueryInterceptor.EntityFrameworkCore6.csproj", "{B200DEFD-7458-4A0C-9A54-594AC76EA4CA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.Core.ConsoleApp.EF7", "test\QueryInterceptor.Core.ConsoleApp.EF7\QueryInterceptor.Core.ConsoleApp.EF7.csproj", "{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,10 @@ Global
 		{B200DEFD-7458-4A0C-9A54-594AC76EA4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B200DEFD-7458-4A0C-9A54-594AC76EA4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B200DEFD-7458-4A0C-9A54-594AC76EA4CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +106,7 @@ Global
 		{85925F94-0F55-4C14-8F58-693CAD6D66CE} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{AD01F92B-025C-4ECA-8829-84B2721E7181} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{B200DEFD-7458-4A0C-9A54-594AC76EA4CA} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
+		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9} = {5F0BE9AA-801D-4D67-B349-B0EBD613E413}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09C56576-C368-4200-96CA-851C111EF8B9}

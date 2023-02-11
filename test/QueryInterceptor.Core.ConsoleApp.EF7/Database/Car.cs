@@ -2,29 +2,28 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Linq.PropertyTranslator.Core;
 
-namespace QueryInterceptor.Core.ConsoleApp.EF3.Database
+namespace QueryInterceptor.Core.ConsoleApp.EF7.Database;
+
+public class Car
 {
-    public class Car
-    {
-        [Key]
-        public int Key { get; set; }
+    [Key]
+    public int Key { get; set; }
 
-        [Required]
-        [StringLength(8)]
-        public string Vin { get; set; }
+    [Required]
+    [StringLength(8)]
+    public string Vin { get; set; }
 
-        [Required]
-        public string Year { get; set; }
+    [Required]
+    public string Year { get; set; }
 
-        [Required]
-        public string Brand { get; set; }
+    [Required]
+    public string Brand { get; set; }
 
-        [Required]
-        public string Color { get; set; }
+    [Required]
+    public string Color { get; set; }
 
-        private static readonly CompiledExpressionMap<Car, double> sqrtExpression
-            = DefaultTranslationOf<Car>.Property(s => s.Sqrt).Is(s => Math.Sqrt(s.Key + 7));
+    private static readonly CompiledExpressionMap<Car, double> sqrtExpression
+        = DefaultTranslationOf<Car>.Property(s => s.Sqrt).Is(s => Math.Sqrt(s.Key + 7));
 
-        public double Sqrt => sqrtExpression.Evaluate(this);
-    }
+    public double Sqrt => sqrtExpression.Evaluate(this);
 }
