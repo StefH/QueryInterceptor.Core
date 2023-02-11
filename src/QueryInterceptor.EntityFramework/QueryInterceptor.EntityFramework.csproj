@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../version.xml" />
 
   <PropertyGroup>
+    <Version>1.0.$(PatchVersion)</Version>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IDbAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.EntityFramework</AssemblyTitle>
     <Authors>David Fowler;Stef Heyenrath</Authors>

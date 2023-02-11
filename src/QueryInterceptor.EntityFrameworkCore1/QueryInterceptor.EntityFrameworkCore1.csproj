@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../version.xml" />
 
   <PropertyGroup>
-    <Version>1.0.8.0</Version>
+    <Version>1.0.$(PatchVersion)</Version>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
     <Authors>Stef Heyenrath</Authors>
@@ -48,11 +49,11 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-  
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.3" />
     <PackageReference Include="Microsoft.CSharp" Version="4.3.0" />
-   <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
   </ItemGroup>
 
