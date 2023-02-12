@@ -18,6 +18,8 @@ public class EqualsToNotEqualsVisitor : ExpressionVisitor
             // Change == to != and add dummy
             int seven = 7;
 
+            // EF7 : [Microsoft.EntityFrameworkCore.Query.EntityQueryRootExpression].Where(x => ((x.Color != "Blue") AndAlso (7 == 7))).FirstOrDefault()
+
             return Expression.AndAlso(Expression.NotEqual(node.Left, node.Right), Expression.Equal(Expression.Constant(7), Expression.Constant(seven)));
         }
 
@@ -31,8 +33,8 @@ public class Program
     {
         Console.WriteLine("Hello QueryInterceptor.EntityFrameworkCore");
 
-        //Console.WriteLine("Enable ExpressionOptimizer");
-        //ExtensibilityPoint.QueryOptimizer = ExpressionOptimizer.visit;
+        Console.WriteLine("Enable ExpressionOptimizer");
+        ExtensibilityPoint.QueryOptimizer = ExpressionOptimizer.visit;
 
         var visitor = new EqualsToNotEqualsVisitor();
 
@@ -56,6 +58,8 @@ public class Program
             context.Cars.Add(new Car { Brand = "Alfa", Color = "Black" });
             context.SaveChanges();
         }
+
+        // [Microsoft.EntityFrameworkCore.Query.EntityQueryRootExpression].Where(x => ((x.Color != "Blue") AndAlso (7 == 7))).FirstOrDefault()
 
         var carFirstOrDefault = context.Cars.AsQueryable().InterceptWith(visitor).Where(x => x.Color == "Blue").FirstOrDefault();
         Console.WriteLine("carFirstOrDefault {0}", JsonConvert.SerializeObject(carFirstOrDefault, Formatting.Indented));
