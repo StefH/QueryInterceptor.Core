@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Version>7.0.$(PatchVersion)</Version>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
-		<AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
+    <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
 		<Authors>Stef Heyenrath</Authors>
 		<TargetFrameworks>net6;net7</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);EFCORE_6_UP</DefineConstants>
 		<AssemblyName>QueryInterceptor.EntityFrameworkCore7</AssemblyName>
-		<PackageId>QueryInterceptor.EntityFrameworkCore7</PackageId>
+    <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
 		<PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
 		<PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
 		<PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
@@ -24,6 +24,11 @@
 		<AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>QueryInterceptor.Core</RootNamespace>
 	</PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="..\QueryInterceptor.Core\Compatibility\IntrospectionExtensions.cs" Link="Compatibility\IntrospectionExtensions.cs" />

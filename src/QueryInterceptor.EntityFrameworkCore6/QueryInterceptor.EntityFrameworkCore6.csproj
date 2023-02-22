@@ -11,7 +11,7 @@
 		<Nullable>enable</Nullable>
 		<DefineConstants>$(DefineConstants);EFCORE_6_UP</DefineConstants>
 		<AssemblyName>QueryInterceptor.EntityFrameworkCore6</AssemblyName>
-		<PackageId>QueryInterceptor.EntityFrameworkCore6</PackageId>
+    <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
 		<PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
 		<PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
 		<PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
@@ -24,6 +24,11 @@
 		<AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
     <RootNamespace>QueryInterceptor.Core</RootNamespace>
 	</PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\QueryInterceptor.Core\Compatibility\IntrospectionExtensions.cs" Link="Compatibility\IntrospectionExtensions.cs" />
