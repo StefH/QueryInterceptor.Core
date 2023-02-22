@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>net7</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>QueryInterceptor.Core.ConsoleApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>QueryInterceptor.Core.ConsoleApp</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Linq.Expression.Optimizer" Version="1.0.13" />
+    <!--<PackageReference Include="Linq.Expression.Optimizer" Version="1.0.13" />-->
     <PackageReference Include="Linq.PropertyTranslator.Core" Version="1.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />

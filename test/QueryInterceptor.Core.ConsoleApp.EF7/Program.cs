@@ -33,20 +33,17 @@ public class Program
     {
         Console.WriteLine("Hello QueryInterceptor.EntityFrameworkCore");
 
-        Console.WriteLine("Enable ExpressionOptimizer");
-        ExtensibilityPoint.QueryOptimizer = ExpressionOptimizer.visit;
+        // Console.WriteLine("Enable ExpressionOptimizer");
+        // ExtensibilityPoint.QueryOptimizer = ExpressionOptimizer.visit;
 
         var visitor = new EqualsToNotEqualsVisitor();
 
-        // doit
-
         IQueryable<int> query = Enumerable.Range(0, 10).AsQueryable().Where(n => n > 0 && n % 2 == 0);
 
-        List<int> numbersEven = query.ToList();
+        var numbersEven = query.ToList();
         Console.WriteLine("numbersEven > 0 = {0}", string.Join(", ", numbersEven));
 
-            
-        List<int> numbersOdd = query.InterceptWith(visitor).Where(x => x >= 0).ToList();
+        var numbersOdd = query.InterceptWith(visitor).Where(x => x >= 0).ToList();
         Console.WriteLine("numbersOdd  > 0 = {0}", string.Join(", ", numbersOdd));
 
         var context = new NorthwindModel();
