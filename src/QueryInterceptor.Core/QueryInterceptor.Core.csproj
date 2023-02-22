@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../version.xml" />
 
   <PropertyGroup>
+    <Version>1.0.$(PatchVersion)</Version>
     <Description>Exposes a generic extension method to IQueryable&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
     <AssemblyTitle>QueryInterceptor.Core</AssemblyTitle>
     <Authors>David Fowler;Stef Heyenrath</Authors>
@@ -26,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="10.4.0">
+    <PackageReference Include="JetBrains.Annotations" Version="2022.3.1">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>

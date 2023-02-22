@@ -1,10 +1,12 @@
 <Project>
   <PropertyGroup>
     <MsBuildAllProjects>$(MsBuildAllProjects);$(MsBuildThisFileFullPath)</MsBuildAllProjects>
+    <LangVersion>11</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <VersionPrefix>1.0.7.0</VersionPrefix>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
 </Project>

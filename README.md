@@ -12,9 +12,11 @@ Forked from :
 https://github.com/davidfowl/QueryInterceptor with support for .Net Core.
 
 The following frameworks are supported
-* net40 and up
+* net45 and up
 * netstandard1.3
-* netstandard2.0
+* netstandard2.0 and netstandard2.1
+* net6.0
+* net7.0
 
 ## The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.

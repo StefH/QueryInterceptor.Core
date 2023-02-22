@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Linq.PropertyTranslator.Core;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using QueryInterceptor.Core.ConsoleApp.Database;
@@ -64,6 +65,9 @@ namespace QueryInterceptor.Core.ConsoleApp
 
             var carToListAsync = context.Cars.AsQueryable().InterceptWith(visitor).Where(x => x.Color == "Blue").ToListAsync();
             Console.WriteLine("carToListAsync {0}", JsonConvert.SerializeObject(carToListAsync.Result, Formatting.Indented));
+
+            var ps = context.Cars.AsQueryable().InterceptWith(new PropertyVisitor()).Where(x => x.Color == "Blue").FirstOrDefault();
+            Console.WriteLine("ps {0}", JsonConvert.SerializeObject(ps, Formatting.Indented));
 
             Console.WriteLine("Press key...");
             Console.ReadLine();

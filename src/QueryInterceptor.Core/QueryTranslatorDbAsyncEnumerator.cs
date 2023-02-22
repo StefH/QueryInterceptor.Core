@@ -31,6 +31,19 @@ namespace QueryInterceptor.Core
 #if EF
         object IDbAsyncEnumerator.Current => Current;
 #endif
+
+#if EFCORE3
+        public ValueTask DisposeAsync()
+        {
+            _inner.Dispose();
+            return new ValueTask();
+        }
+
+        public ValueTask<bool> MoveNextAsync()
+        {
+            return new ValueTask<bool>(_inner.MoveNext());
+        }
+#endif
     }
 }
 #endif
