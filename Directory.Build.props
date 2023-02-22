@@ -5,8 +5,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <!--<PropertyGroup>
-    <VersionPrefix>1.0.7.0</VersionPrefix>
-  </PropertyGroup>-->
-
 </Project>
