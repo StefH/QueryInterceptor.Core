@@ -1,3 +1,7 @@
+# 1.0.9 (23 November 2023)
+- [#18](https://github.com/StefH/QueryInterceptor.Core/pull/18) - Added: net8.0 support [enhancement] contributed by [atharkes](https://github.com/atharkes)
+- [#17](https://github.com/StefH/QueryInterceptor.Core/issues/17) - Framework Support Request: net8.0 [enhancement]
+
 # 1.0.8 (22 February 2023)
 - [#15](https://github.com/StefH/QueryInterceptor.Core/pull/15) - Add support for Microsoft.EntityFrameworkCore 6 and 7 [enhancement] contributed by [StefH](https://github.com/StefH)
 - [#14](https://github.com/StefH/QueryInterceptor.Core/issues/14) - EFCore 3.0 or higher introduces runtime errors [bug]
