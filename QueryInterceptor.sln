@@ -13,8 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		Generate-ReleaseNotes.bat = Generate-ReleaseNotes.bat
 		README.md = README.md
-		version.xml = version.xml
 		ReleaseNotes.md = ReleaseNotes.md
+		version.xml = version.xml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.Core.ConsoleApp", "test\QueryInterceptor.Core.ConsoleApp\QueryInterceptor.Core.ConsoleApp.csproj", "{44118CD2-96CD-4191-87E1-00FAFF35EA9C}"
@@ -40,6 +40,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore6", "src\QueryInterceptor.EntityFrameworkCore6\QueryInterceptor.EntityFrameworkCore6.csproj", "{B200DEFD-7458-4A0C-9A54-594AC76EA4CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.Core.ConsoleApp.EF7", "test\QueryInterceptor.Core.ConsoleApp.EF7\QueryInterceptor.Core.ConsoleApp.EF7.csproj", "{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore8", "src\QueryInterceptor.EntityFrameworkCore8\QueryInterceptor.EntityFrameworkCore8.csproj", "{996D4DA2-10EA-4E77-9190-9F6388499E90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{996D4DA2-10EA-4E77-9190-9F6388499E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{996D4DA2-10EA-4E77-9190-9F6388499E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{996D4DA2-10EA-4E77-9190-9F6388499E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{996D4DA2-10EA-4E77-9190-9F6388499E90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{AD01F92B-025C-4ECA-8829-84B2721E7181} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{B200DEFD-7458-4A0C-9A54-594AC76EA4CA} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9} = {5F0BE9AA-801D-4D67-B349-B0EBD613E413}
+		{996D4DA2-10EA-4E77-9190-9F6388499E90} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09C56576-C368-4200-96CA-851C111EF8B9}
