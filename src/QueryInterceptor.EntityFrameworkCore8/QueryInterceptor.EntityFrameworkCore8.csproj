@@ -39,6 +39,9 @@
     <Compile Include="..\QueryInterceptor.Core\QueryTranslatorExtensions.cs" Link="QueryTranslatorExtensions.cs" />
     <Compile Include="..\QueryInterceptor.Core\Validation\Check.cs" Link="Validation\Check.cs" />
     <Compile Include="..\QueryInterceptor.Core\Validation\CoreStrings.cs" Link="Validation\CoreStrings.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFrameworkCore7\QueryTranslator.cs" Link="QueryTranslator.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFrameworkCore7\QueryTranslatorDbAsyncEnumerator.cs" Link="QueryTranslatorDbAsyncEnumerator.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFrameworkCore7\QueryTranslatorProviderAsync.cs" Link="QueryTranslatorProviderAsync.cs" />
     <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncEnumerator.cs" Link="IDbAsyncEnumerator.cs" />
     <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncQueryProvider.cs" Link="IDbAsyncQueryProvider.cs" />
   </ItemGroup>
