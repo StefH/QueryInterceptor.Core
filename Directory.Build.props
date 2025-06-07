@@ -1,8 +1,7 @@
 <Project>
   <PropertyGroup>
     <MsBuildAllProjects>$(MsBuildAllProjects);$(MsBuildThisFileFullPath)</MsBuildAllProjects>
-    <LangVersion>11</LangVersion>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 </Project>

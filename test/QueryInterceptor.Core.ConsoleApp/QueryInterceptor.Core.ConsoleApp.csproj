@@ -2,23 +2,21 @@
 
   <PropertyGroup>
     <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>QueryInterceptor.Core.ConsoleApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>QueryInterceptor.Core.ConsoleApp</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Linq.Expression.Optimizer" Version="1.0.15" />
+    <PackageReference Include="Linq.Expression.Optimizer" Version="1.0.31" />
     <PackageReference Include="Linq.PropertyTranslator.Core" Version="1.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.16" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore2\QueryInterceptor.EntityFrameworkCore2.csproj" />
+    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore8\QueryInterceptor.EntityFrameworkCore8.csproj" />
   </ItemGroup>
 
 </Project>

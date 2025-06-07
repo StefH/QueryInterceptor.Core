@@ -71,6 +71,6 @@ public class Program
         Console.WriteLine("ps {0}", JsonConvert.SerializeObject(ps, Formatting.Indented));
 
         Console.WriteLine("Press key...");
-        Console.ReadLine();
+        Console.Read();
     }
 }

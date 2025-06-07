@@ -1,0 +1,22 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace QueryInterceptor.Core.ConsoleApp.net48.Database;
+
+public class Car
+{
+    [Key]
+    public int Key { get; set; }
+
+    [Required]
+    [StringLength(8)]
+    public string Vin { get; set; }
+
+    [Required]
+    public string Year { get; set; }
+
+    [Required]
+    public string Brand { get; set; }
+
+    [Required]
+    public string Color { get; set; }
+}

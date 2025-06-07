@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Linq.Expression.Optimizer" Version="1.0.15" />
+    <PackageReference Include="Linq.PropertyTranslator.Core" Version="1.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFramework\QueryInterceptor.EntityFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Northwind.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
