@@ -11,9 +11,6 @@
     <AssemblyName>QueryInterceptor.EntityFramework</AssemblyName>
     <PackageId>QueryInterceptor.EntityFramework</PackageId>
     <PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
-    <PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE</PackageLicenseUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>

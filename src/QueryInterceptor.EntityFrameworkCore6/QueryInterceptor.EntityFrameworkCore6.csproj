@@ -13,9 +13,6 @@
 		<AssemblyName>QueryInterceptor.EntityFrameworkCore6</AssemblyName>
     <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
 		<PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
-		<PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
-		<PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
-		<PackageLicenseUrl>https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE</PackageLicenseUrl>
 		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
 		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
 		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -48,7 +45,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.13" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
 	</ItemGroup>
 
 </Project>
