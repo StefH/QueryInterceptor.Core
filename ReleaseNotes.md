@@ -1,3 +1,6 @@
+# 1.0.10 (22 June 2025)
+- [#20](https://github.com/StefH/QueryInterceptor.Core/pull/20) - Update some NuGet packages and add sponsor [enhancement] contributed by [StefH](https://github.com/StefH)
+
 # 1.0.9 (23 November 2023)
 - [#18](https://github.com/StefH/QueryInterceptor.Core/pull/18) - Added: net8.0 support [enhancement] contributed by [atharkes](https://github.com/atharkes)
 - [#17](https://github.com/StefH/QueryInterceptor.Core/issues/17) - Framework Support Request: net8.0 [enhancement]
