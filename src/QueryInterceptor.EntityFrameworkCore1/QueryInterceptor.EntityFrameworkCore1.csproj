@@ -11,9 +11,6 @@
     <AssemblyName>QueryInterceptor.EntityFrameworkCore</AssemblyName>
     <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
     <PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
-    <PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/StefH/QueryInterceptor.Core/master/LICENSE</PackageLicenseUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -44,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.6" />
     <PackageReference Include="System.Interactive.Async" Version="3.1.1" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />

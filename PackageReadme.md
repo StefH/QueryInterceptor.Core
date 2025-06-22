@@ -1,29 +1,12 @@
-# QueryInterceptor.Core
+﻿## QueryInterceptor.Core
 
-| Project | NuGet | Dependency |
-| ------- | ----- | ---------- |
-| QueryInterceptor.Core | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.Core.svg)](https://www.nuget.org/packages/QueryInterceptor.Core) | - |
-| QueryInterceptor.EntityFramework | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFramework.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFramework) | EntityFramework |
-| QueryInterceptor.EntityFrameworkCore | [![Version](https://img.shields.io/nuget/v/QueryInterceptor.EntityFrameworkCore.svg)](https://www.nuget.org/packages/QueryInterceptor.EntityFrameworkCore) | Microsoft.EntityFrameworkCore |
-
-Forked from :
-https://github.com/davidfowl/QueryInterceptor with support for .Net Core.
-
-The following frameworks are supported
-* net45 and up
-* netstandard1.3
-* netstandard2.0 and netstandard2.1
-* net6.0
-* net7.0
-* net8.0
-
-## The problem
+### The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.
 When trying to plug your expression visitor into an IQuerable's expression tree, you need to write a linq provider (yikes).
 
 Implementation based on <http://stackoverflow.com/questions/1839901/how-to-wrap-entity-framework-to-intercept-the-linq-expression-just-before-executi>
 
-## The solution
+### The solution
 QueryInterceptor introduces one extension method on `IQueryable<T>` (`InterceptWith`) that lets you plug in arbitrary expression visitors.
 
 ``` c#
@@ -36,7 +19,7 @@ namespace QueryInterceptor
 }
 ```
 
-## Basic Example
+### Basic Example
 The example below uses an expression visitor that changes == to != anywhere in the expression tree.
 
 ``` C#
@@ -80,7 +63,8 @@ class Program
 }
 ```
 
-## Sponsors
+
+### Sponsors
 
 [Entity Framework Extensions](https://entityframework-extensions.net/?utm_source=StefH) and [Dapper Plus](https://dapper-plus.net/?utm_source=StefH) are major sponsors and proud to contribute to the development of **QueryInterceptor.Core**.
 

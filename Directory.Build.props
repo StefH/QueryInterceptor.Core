@@ -3,5 +3,14 @@
     <MsBuildAllProjects>$(MsBuildAllProjects);$(MsBuildThisFileFullPath)</MsBuildAllProjects>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+
+    <PackageReleaseNotes>See releasenotes</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/StefH/QueryInterceptor.Core</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>PackageReadme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../PackageReadme.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>
