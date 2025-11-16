@@ -16,6 +16,8 @@ The following frameworks are supported
 * net6.0
 * net7.0
 * net8.0
+* net9.0
+* net10.0
 
 ## The problem
 Normally when you're trying to modify expression trees you need to write an expression visitor.

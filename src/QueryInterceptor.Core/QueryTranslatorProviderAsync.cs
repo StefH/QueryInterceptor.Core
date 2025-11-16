@@ -106,7 +106,7 @@ namespace QueryInterceptor.Core
             }
 
             // In case Source.Provider is not a EntityQueryProvider, just execute normal
-            return (IAsyncEnumerable<TResult>)Execute<TResult>(expression);
+            return (IAsyncEnumerable<TResult>)Execute<TResult>(expression)!;
         }
 #else
         [PublicAPI]

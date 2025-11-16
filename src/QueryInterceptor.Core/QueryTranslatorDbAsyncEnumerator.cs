@@ -29,7 +29,7 @@ namespace QueryInterceptor.Core
         public T Current => _inner.Current;
 
 #if EF
-        object IDbAsyncEnumerator.Current => Current;
+        object? IDbAsyncEnumerator.Current => Current;
 #endif
 
 #if EFCORE3

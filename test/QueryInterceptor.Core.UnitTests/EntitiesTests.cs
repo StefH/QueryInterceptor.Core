@@ -9,163 +9,162 @@ using Xunit;
 using QueryInterceptor.Core;
 
 #if EFCORE
-namespace QueryInterceptor.EntityFrameworkCore
+namespace QueryInterceptor.EntityFrameworkCore;
 #else
-namespace QueryInterceptor.Core.UnitTests
+namespace QueryInterceptor.Core.UnitTests;
 #endif
+
+/// <summary>
+/// Summary description for EntitiesTests
+/// </summary>
+public class EntitiesTests : IDisposable
 {
-    /// <summary>
-    /// Summary description for EntitiesTests
-    /// </summary>
-    public class EntitiesTests : IDisposable
+    static readonly Random Rnd = new Random(1);
+
+    BlogContext _context;
+
+    public EntitiesTests()
     {
-        static readonly Random Rnd = new Random(1);
+        var builder = new DbContextOptionsBuilder();
+        builder.UseSqlite($"Filename=QueryInterceptor.Core.DB.{Guid.NewGuid()}.db");
+        //builder.UseInMemoryDatabase();
 
-        BlogContext _context;
+        _context = new BlogContext(builder.Options);
+        _context.Database.EnsureDeleted();
+        _context.Database.EnsureCreated();
+    }
 
-        public EntitiesTests()
+    // Use TestCleanup to run code after each test has run
+    public void Dispose()
+    {
+        _context.Database.EnsureDeleted();
+
+        _context.Dispose();
+        _context = null;
+    }
+
+    void PopulateTestData(int blogCount = 25, int postCount = 10)
+    {
+        for (int i = 0; i < blogCount; i++)
         {
-            var builder = new DbContextOptionsBuilder();
-            builder.UseSqlite($"Filename=QueryInterceptor.Core.DB.{Guid.NewGuid()}.db");
-            //builder.UseInMemoryDatabase();
+            var blog = new Blog { Name = "Blog" + (i + 1) };
 
-            _context = new BlogContext(builder.Options);
-            _context.Database.EnsureDeleted();
-            _context.Database.EnsureCreated();
-        }
+            _context.Blogs.Add(blog);
 
-        // Use TestCleanup to run code after each test has run
-        public void Dispose()
-        {
-            _context.Database.EnsureDeleted();
-
-            _context.Dispose();
-            _context = null;
-        }
-
-        void PopulateTestData(int blogCount = 25, int postCount = 10)
-        {
-            for (int i = 0; i < blogCount; i++)
+            for (int j = 0; j < postCount; j++)
             {
-                var blog = new Blog { Name = "Blog" + (i + 1) };
-
-                _context.Blogs.Add(blog);
-
-                for (int j = 0; j < postCount; j++)
+                var post = new Post
                 {
-                    var post = new Post
-                    {
-                        Blog = blog,
-                        Title = $"Blog {i + 1} - Post {j + 1}",
-                        Content = "My Content",
-                        PostDate = DateTime.Today.AddDays(-Rnd.Next(0, 100)).AddSeconds(Rnd.Next(0, 30000)),
-                        NumberOfReads = Rnd.Next(0, 5000)
-                    };
+                    Blog = blog,
+                    Title = $"Blog {i + 1} - Post {j + 1}",
+                    Content = "My Content",
+                    PostDate = DateTime.Today.AddDays(-Rnd.Next(0, 100)).AddSeconds(Rnd.Next(0, 30000)),
+                    NumberOfReads = Rnd.Next(0, 5000)
+                };
 
-                    _context.Posts.Add(post);
-                }
+                _context.Posts.Add(post);
             }
-
-            _context.SaveChanges();
         }
 
-        // Fixed : EF issue https://github.com/aspnet/EntityFramework/issues/4968
-        [Fact]
-        public void Entities_Select_BlogAndPosts()
-        {
-            //Arrange
-            PopulateTestData(5, 5);
+        _context.SaveChanges();
+    }
 
-            //Act
-            var expected = _context.Blogs.Select(x => new { x.BlogId, x.Name, x.Posts }).ToArray();
+    // Fixed : EF issue https://github.com/aspnet/EntityFramework/issues/4968
+    [Fact]
+    public void Entities_Select_BlogAndPosts()
+    {
+        //Arrange
+        PopulateTestData(5, 5);
 
-            //Assert
-            Assert.Equal(5, expected.Length);
-        }
+        //Act
+        var expected = _context.Blogs.Select(x => new { x.BlogId, x.Name, x.Posts }).ToArray();
 
-        [Fact]
-        public void Entities_InterceptWith_IQueryable()
-        {
-            PopulateTestData(10, 0);
+        //Assert
+        Assert.Equal(5, expected.Length);
+    }
 
-            IQueryable<Blog> query = _context.Blogs.Where(b => b.BlogId % 2 == 0).AsQueryable();
+    [Fact]
+    public void Entities_InterceptWith_IQueryable()
+    {
+        PopulateTestData(10, 0);
 
-            var visitor = new EqualsToNotEqualsVisitor();
-            IQueryable queryIntercepted = query.InterceptWith(visitor);
-            Assert.NotNull(queryIntercepted);
+        IQueryable<Blog> query = _context.Blogs.Where(b => b.BlogId % 2 == 0).AsQueryable();
 
-            Assert.Equal(typeof(Blog), queryIntercepted.ElementType);
-            Assert.Equal("QueryInterceptor.Core.QueryTranslatorProviderAsync", queryIntercepted.Provider.ToString());
+        var visitor = new EqualsToNotEqualsVisitor();
+        IQueryable queryIntercepted = query.InterceptWith(visitor);
+        Assert.NotNull(queryIntercepted);
 
-            Expression<Func<Blog, bool>> predicate = b => b.BlogId >= 0;
-            var queryCreated = queryIntercepted.Provider.CreateQuery(predicate);
-            Assert.NotNull(queryCreated);
-        }
+        Assert.Equal(typeof(Blog), queryIntercepted.ElementType);
+        Assert.Equal("QueryInterceptor.Core.QueryTranslatorProviderAsync", queryIntercepted.Provider.ToString());
 
-        [Fact]
-        public void Entities_InterceptWith_EqualsToNotEqualsVisitor()
-        {
-            PopulateTestData(10, 0);
+        Expression<Func<Blog, bool>> predicate = b => b.BlogId >= 0;
+        var queryCreated = queryIntercepted.Provider.CreateQuery(predicate);
+        Assert.NotNull(queryCreated);
+    }
 
-            IQueryable<Blog> query = _context.Blogs.Where(b => b.BlogId % 2 == 0).AsQueryable();
+    [Fact]
+    public void Entities_InterceptWith_EqualsToNotEqualsVisitor()
+    {
+        PopulateTestData(10, 0);
 
-            var visitor = new EqualsToNotEqualsVisitor();
-            IQueryable<Blog> queryIntercepted = query.InterceptWith(visitor);
-            Assert.NotNull(queryIntercepted);
+        IQueryable<Blog> query = _context.Blogs.Where(b => b.BlogId % 2 == 0).AsQueryable();
 
-            Assert.Equal(new List<int> { 1, 3, 5, 7, 9 }, queryIntercepted.Select(b => b.BlogId).OrderBy(id => id).ToList());
-        }
+        var visitor = new EqualsToNotEqualsVisitor();
+        IQueryable<Blog> queryIntercepted = query.InterceptWith(visitor);
+        Assert.NotNull(queryIntercepted);
 
-        [Fact]
-        public void Entities_Select()
-        {
-            _context.Blogs.Add(new Blog { Name = "A" });
-            _context.Blogs.Add(new Blog { Name = "a" });
-            _context.SaveChanges();
+        Assert.Equal(new List<int> { 1, 3, 5, 7, 9 }, queryIntercepted.Select(b => b.BlogId).OrderBy(id => id).ToList());
+    }
 
-            IQueryable<Blog> query = _context.Blogs.AsQueryable();
+    [Fact]
+    public void Entities_Select()
+    {
+        _context.Blogs.Add(new Blog { Name = "A" });
+        _context.Blogs.Add(new Blog { Name = "a" });
+        _context.SaveChanges();
 
-            List<Blog> queryIntercepted1 = query.Where(b => b.Name == "A").ToList();
-            Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());
+        IQueryable<Blog> query = _context.Blogs.AsQueryable();
 
-            List<Blog> queryIntercepted2 = query.Where(b => b.Name == "a").ToList();
-            Assert.Equal(new List<string> { "a" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
-        }
+        List<Blog> queryIntercepted1 = query.Where(b => b.Name == "A").ToList();
+        Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());
 
-        [Fact]
-        public void Entities_InterceptWith_StringComparisonVisitor_CurrentCultureIgnoreCase()
-        {
-            _context.Blogs.Add(new Blog { Name = "A" });
-            _context.Blogs.Add(new Blog { Name = "a" });
-            _context.SaveChanges();
+        List<Blog> queryIntercepted2 = query.Where(b => b.Name == "a").ToList();
+        Assert.Equal(new List<string> { "a" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
+    }
 
-            IQueryable<Blog> query = _context.Blogs.AsQueryable();
+    [Fact(Skip = "https://go.microsoft.com/fwlink/?linkid=2129535")]
+    public void Entities_InterceptWith_StringComparisonVisitor_CurrentCultureIgnoreCase()
+    {
+        _context.Blogs.Add(new Blog { Name = "A" });
+        _context.Blogs.Add(new Blog { Name = "a" });
+        _context.SaveChanges();
 
-            var visitor = new StringComparisonVisitor(StringComparison.CurrentCultureIgnoreCase);
+        IQueryable<Blog> query = _context.Blogs.AsQueryable();
 
-            List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
-            Assert.Equal(new List<string> { "a", "A" }, queryIntercepted1.Select(b => b.Name).OrderBy(x => x).ToList());
+        var visitor = new StringComparisonVisitor(StringComparison.CurrentCultureIgnoreCase);
 
-            List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
-            Assert.Equal(new List<string> { "a", "A" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
-        }
+        List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
+        Assert.Equal(new List<string> { "a", "A" }, queryIntercepted1.Select(b => b.Name).OrderBy(x => x).ToList());
 
-        [Fact]
-        public void Entities_InterceptWith_StringComparisonVisitor_CurrentCulture()
-        {
-            _context.Blogs.Add(new Blog { Name = "A" });
-            _context.Blogs.Add(new Blog { Name = "a" });
-            _context.SaveChanges();
+        List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
+        Assert.Equal(new List<string> { "a", "A" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
+    }
 
-            IQueryable<Blog> query = _context.Blogs.AsQueryable();
+    [Fact(Skip = "https://go.microsoft.com/fwlink/?linkid=2129535")]
+    public void Entities_InterceptWith_StringComparisonVisitor_CurrentCulture()
+    {
+        _context.Blogs.Add(new Blog { Name = "A" });
+        _context.Blogs.Add(new Blog { Name = "a" });
+        _context.SaveChanges();
 
-            var visitor = new StringComparisonVisitor(StringComparison.CurrentCulture);
+        IQueryable<Blog> query = _context.Blogs.AsQueryable();
 
-            List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
-            Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());
+        var visitor = new StringComparisonVisitor(StringComparison.CurrentCulture);
 
-            List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
-            Assert.Equal(new List<string> { "a" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
-        }
+        List<Blog> queryIntercepted1 = query.InterceptWith(visitor).Where(b => b.Name == "A").ToList();
+        Assert.Equal(new List<string> { "A" }, queryIntercepted1.Select(b => b.Name).ToList());
+
+        List<Blog> queryIntercepted2 = query.InterceptWith(visitor).Where(b => b.Name == "a").ToList();
+        Assert.Equal(new List<string> { "a" }, queryIntercepted2.Select(b => b.Name).OrderBy(x => x).ToList());
     }
 }

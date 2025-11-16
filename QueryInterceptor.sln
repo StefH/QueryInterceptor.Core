@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33213.308
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44DC98CA-394C-4053-8F2A-3C9020FB2B27}"
 EndProject
@@ -42,6 +42,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryInterceptor.EntityFrameworkCore8", "src\QueryInterceptor.EntityFrameworkCore8\QueryInterceptor.EntityFrameworkCore8.csproj", "{43FD552B-E1F9-4001-9E7E-9607C859E584}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryInterceptor.Core.ConsoleApp.net48", "test\QueryInterceptor.Core.ConsoleApp.net48\QueryInterceptor.Core.ConsoleApp.net48.csproj", "{CC605D50-D130-CAD3-65F4-9809F25E6B65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryInterceptor.EntityFrameworkCore9", "src\QueryInterceptor.EntityFrameworkCore9\QueryInterceptor.EntityFrameworkCore9.csproj", "{64BD0BCD-77E3-A43A-C110-A9989C99BE1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryInterceptor.EntityFrameworkCore10", "src\QueryInterceptor.EntityFrameworkCore10\QueryInterceptor.EntityFrameworkCore10.csproj", "{C9D15E5F-7F9C-CD79-1AE6-677AAEDFD14A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +101,14 @@ Global
 		{CC605D50-D130-CAD3-65F4-9809F25E6B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC605D50-D130-CAD3-65F4-9809F25E6B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC605D50-D130-CAD3-65F4-9809F25E6B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64BD0BCD-77E3-A43A-C110-A9989C99BE1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64BD0BCD-77E3-A43A-C110-A9989C99BE1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64BD0BCD-77E3-A43A-C110-A9989C99BE1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64BD0BCD-77E3-A43A-C110-A9989C99BE1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D15E5F-7F9C-CD79-1AE6-677AAEDFD14A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D15E5F-7F9C-CD79-1AE6-677AAEDFD14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D15E5F-7F9C-CD79-1AE6-677AAEDFD14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D15E5F-7F9C-CD79-1AE6-677AAEDFD14A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +126,8 @@ Global
 		{97FE839B-29A6-4BD4-8EBD-24339E73C4D9} = {5F0BE9AA-801D-4D67-B349-B0EBD613E413}
 		{43FD552B-E1F9-4001-9E7E-9607C859E584} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 		{CC605D50-D130-CAD3-65F4-9809F25E6B65} = {5F0BE9AA-801D-4D67-B349-B0EBD613E413}
+		{64BD0BCD-77E3-A43A-C110-A9989C99BE1C} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
+		{C9D15E5F-7F9C-CD79-1AE6-677AAEDFD14A} = {44DC98CA-394C-4053-8F2A-3C9020FB2B27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09C56576-C368-4200-96CA-851C111EF8B9}

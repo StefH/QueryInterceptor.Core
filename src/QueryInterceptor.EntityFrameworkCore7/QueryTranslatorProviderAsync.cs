@@ -44,7 +44,7 @@ internal class QueryTranslatorProviderAsync : ExpressionVisitor, System.Data.Ent
         Check.NotNull(expression, nameof(expression));
 
         Type elementType = expression.Type.GetGenericArguments().First();
-        return (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType), Source, expression, _visitors);
+        return (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType), Source, expression, _visitors)!;
     }
 
     [PublicAPI]
@@ -114,8 +114,7 @@ internal class QueryTranslatorProviderAsync : ExpressionVisitor, System.Data.Ent
         // Fix up the Expression tree to work with the underlying LINQ provider
         if (node.Type.GetTypeInfo().IsGenericType && node.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
         {
-            var provider = ((IQueryable)node.Value).Provider as QueryTranslatorProviderAsync;
-
+            var provider = (node.Value as IQueryable)?.Provider as QueryTranslatorProviderAsync;
             if (provider != null)
             {
                 return provider.Source.Expression;
