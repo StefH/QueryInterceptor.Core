@@ -1,3 +1,6 @@
+# 1.0.11 (16 November 2025)
+- [#21](https://github.com/StefH/QueryInterceptor.Core/pull/21) - Add .NET and .NET 10 [enhancement] contributed by [StefH](https://github.com/StefH)
+
 # 1.0.10 (22 June 2025)
 - [#20](https://github.com/StefH/QueryInterceptor.Core/pull/20) - Update some NuGet packages and add sponsor [enhancement] contributed by [StefH](https://github.com/StefH)
 
