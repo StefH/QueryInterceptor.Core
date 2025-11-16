@@ -74,7 +74,7 @@ namespace QueryInterceptor.Core.Validation
         [ContractAnnotation("value:null => halt")]
         public static string NotEmpty(string value, [InvokerParameterName] [NotNull] string parameterName)
         {
-            Exception e = null;
+            Exception? e = null;
             if (ReferenceEquals(value, null))
             {
                 e = new ArgumentNullException(parameterName);
@@ -91,7 +91,7 @@ namespace QueryInterceptor.Core.Validation
                 throw e;
             }
 
-            return value;
+            return value!;
         }
 
         public static string NullButNotEmpty(string value, [InvokerParameterName] [NotNull] string parameterName)
@@ -103,7 +103,7 @@ namespace QueryInterceptor.Core.Validation
                 throw new ArgumentException(CoreStrings.ArgumentIsEmpty(parameterName));
             }
 
-            return value;
+            return value!;
         }
 
         public static IList<T> HasNoNulls<T>(IList<T> value, [InvokerParameterName] [NotNull] string parameterName)

@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../version.xml" />
+
+  <PropertyGroup>
+    <Version>9.0.$(PatchVersion)</Version>
+    <Description>Exposes a generic extension method to IQueryable&lt;T&gt; and IAsyncQueryProvider&lt;T&gt; that allows interception of expression trees with expression visitors.</Description>
+    <AssemblyTitle>QueryInterceptor.EntityFrameworkCore</AssemblyTitle>
+    <Authors>Stef Heyenrath</Authors>
+    <TargetFrameworks>net9</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DefineConstants>$(DefineConstants);EFCORE_6_UP</DefineConstants>
+    <AssemblyName>QueryInterceptor.EntityFrameworkCore7</AssemblyName>
+    <PackageId>QueryInterceptor.EntityFrameworkCore</PackageId>
+    <PackageTags>linq;provider;query;intercept;expression;expressionvisitor;visitor</PackageTags>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile>../QueryInterceptor.Core/QueryInterceptor.Core.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>QueryInterceptor.Core</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PathMap>$(MSBuildProjectDirectory)=/</PathMap>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\QueryInterceptor.Core\Compatibility\IntrospectionExtensions.cs" Link="Compatibility\IntrospectionExtensions.cs" />
+    <Compile Include="..\QueryInterceptor.Core\ExpressionVisitors\EqualsToNotEqualsVisitor.cs" Link="ExpressionVisitors\EqualsToNotEqualsVisitor.cs" />
+    <Compile Include="..\QueryInterceptor.Core\ExpressionVisitors\ReplacingVisitor.cs" Link="ExpressionVisitors\ReplacingVisitor.cs" />
+    <Compile Include="..\QueryInterceptor.Core\ExpressionVisitors\StringComparisonVisitor.cs" Link="ExpressionVisitors\StringComparisonVisitor.cs" />
+    <Compile Include="..\QueryInterceptor.Core\ExtensibilityPoint.cs" Link="ExtensibilityPoint.cs" />
+    <Compile Include="..\QueryInterceptor.Core\QueryTranslatorExtensions.cs" Link="QueryTranslatorExtensions.cs" />
+    <Compile Include="..\QueryInterceptor.Core\Validation\Check.cs" Link="Validation\Check.cs" />
+    <Compile Include="..\QueryInterceptor.Core\Validation\CoreStrings.cs" Link="Validation\CoreStrings.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFrameworkCore7\QueryTranslator.cs" Link="QueryTranslator.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFrameworkCore7\QueryTranslatorDbAsyncEnumerator.cs" Link="QueryTranslatorDbAsyncEnumerator.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFrameworkCore7\QueryTranslatorProviderAsync.cs" Link="QueryTranslatorProviderAsync.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncEnumerator.cs" Link="IDbAsyncEnumerator.cs" />
+    <Compile Include="..\QueryInterceptor.EntityFramework\IDbAsyncQueryProvider.cs" Link="IDbAsyncQueryProvider.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Compatibility\" />
+    <Folder Include="ExpressionVisitors\" />
+    <Folder Include="Validation\" />
+  </ItemGroup>
+
+</Project>
