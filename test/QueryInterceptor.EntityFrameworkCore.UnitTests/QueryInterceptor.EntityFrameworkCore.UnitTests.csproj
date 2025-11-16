@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore2\QueryInterceptor.EntityFrameworkCore2.csproj" />
+    <ProjectReference Include="..\..\src\QueryInterceptor.EntityFrameworkCore10\QueryInterceptor.EntityFrameworkCore10.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net10.0' ">
